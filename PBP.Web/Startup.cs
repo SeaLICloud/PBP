@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using PBP.Web.Models;
+using PBP.Web.Models.Context;
 
 namespace PBP.Web
 {
@@ -29,8 +29,7 @@ namespace PBP.Web
             });
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
             var connection = @"Data Source=.\SQLEXPRESS;Initial Catalog=PBPDB;Integrated Security=True";
-            services.AddDbContext<BloggingContext>
-                (options => options.UseSqlServer(connection));
+            services.AddDbContext<AccountContext>(options => options.UseSqlServer(connection));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

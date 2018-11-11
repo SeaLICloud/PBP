@@ -3,11 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28010.2048
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PBP.Web", "PBP.Web\PBP.Web.csproj", "{D73B7F9A-74A9-4C16-BA6E-2F60AC6B9820}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PBP.Web", "PBP.Web\PBP.Web.csproj", "{D73B7F9A-74A9-4C16-BA6E-2F60AC6B9820}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PBP", "PBP\PBP.csproj", "{3BA46711-47BE-40BF-B470-0E6F7B946EAE}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PBP.Tests", "PBP.Tests\PBP.Tests.csproj", "{0C456D7F-F8AD-49F2-ABB5-708539FB981C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PBP.Tests", "PBP.Tests\PBP.Tests.csproj", "{0C456D7F-F8AD-49F2-ABB5-708539FB981C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -19,10 +17,6 @@ Global
 		{D73B7F9A-74A9-4C16-BA6E-2F60AC6B9820}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D73B7F9A-74A9-4C16-BA6E-2F60AC6B9820}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D73B7F9A-74A9-4C16-BA6E-2F60AC6B9820}.Release|Any CPU.Build.0 = Release|Any CPU
-		{3BA46711-47BE-40BF-B470-0E6F7B946EAE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{3BA46711-47BE-40BF-B470-0E6F7B946EAE}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{3BA46711-47BE-40BF-B470-0E6F7B946EAE}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{3BA46711-47BE-40BF-B470-0E6F7B946EAE}.Release|Any CPU.Build.0 = Release|Any CPU
 		{0C456D7F-F8AD-49F2-ABB5-708539FB981C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{0C456D7F-F8AD-49F2-ABB5-708539FB981C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0C456D7F-F8AD-49F2-ABB5-708539FB981C}.Release|Any CPU.ActiveCfg = Release|Any CPU
