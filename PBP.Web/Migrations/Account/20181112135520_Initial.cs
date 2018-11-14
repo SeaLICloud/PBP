@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace PBP.Web.Migrations.Account
 {
-    public partial class InitialAccount : Migration
+    public partial class Initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -12,8 +12,8 @@ namespace PBP.Web.Migrations.Account
                 columns: table => new
                 {
                     Guid = table.Column<Guid>(nullable: false),
-                    CreateTime = table.Column<DateTime>(nullable: false),
-                    UpdateTime = table.Column<DateTime>(nullable: false),
+                    CreateTime = table.Column<DateTime>(nullable: false, defaultValueSql: "GETDATE()"),
+                    UpdateTime = table.Column<DateTime>(nullable: false, defaultValueSql: "GETDATE()"),
                     UserName = table.Column<string>(nullable: false),
                     Password = table.Column<string>(nullable: true)
                 },

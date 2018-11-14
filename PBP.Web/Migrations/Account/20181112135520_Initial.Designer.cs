@@ -10,8 +10,8 @@ using PBP.Web.Models.Context;
 namespace PBP.Web.Migrations.Account
 {
     [DbContext(typeof(AccountContext))]
-    [Migration("20181111112542_InitialAccount")]
-    partial class InitialAccount
+    [Migration("20181112135520_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -27,12 +27,14 @@ namespace PBP.Web.Migrations.Account
                         .ValueGeneratedOnAdd();
 
                     b.Property<DateTime>("CreateTime")
-                        .ValueGeneratedOnAdd();
+                        .ValueGeneratedOnAdd()
+                        .HasDefaultValueSql("GETDATE()");
 
                     b.Property<string>("Password");
 
                     b.Property<DateTime>("UpdateTime")
-                        .ValueGeneratedOnAddOrUpdate();
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasDefaultValueSql("GETDATE()");
 
                     b.Property<string>("UserName")
                         .IsRequired();

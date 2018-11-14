@@ -25,12 +25,14 @@ namespace PBP.Web.Migrations.Account
                         .ValueGeneratedOnAdd();
 
                     b.Property<DateTime>("CreateTime")
-                        .ValueGeneratedOnAdd();
+                        .ValueGeneratedOnAdd()
+                        .HasDefaultValueSql("GETDATE()");
 
                     b.Property<string>("Password");
 
                     b.Property<DateTime>("UpdateTime")
-                        .ValueGeneratedOnAddOrUpdate();
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasDefaultValueSql("GETDATE()");
 
                     b.Property<string>("UserName")
                         .IsRequired();
