@@ -1,8 +1,10 @@
 {
-  "name": "asp.net",
-  "private": true,
+  "name": "asp.net.core",
+  "private": false,
   "dependencies": {
-    "bootstrap": "3.3.6",
-    "font-awesome": "4.6.1"
+    "admin-lte": "v2.4.8"
+  },
+  "resolutions": {
+    "jquery": "^3.2.1"
   }
 }
