@@ -50,7 +50,7 @@ namespace PBP.Web
             {
                 routes.MapRoute(
                     "default",
-                    "{controller=Home}/{action=Index}/{id?}");
+                    "{controller=Account}/{action=Index}/{id?}");
             });
         }
     }
