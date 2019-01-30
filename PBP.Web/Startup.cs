@@ -26,7 +26,7 @@ namespace PBP.Web
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
-            var connection = @"Data Source=.\SQLEXPRESS;Initial Catalog=PBPDB;Integrated Security=True";
+            var connection = @"Data Source=.;Initial Catalog=PBPDB;Integrated Security=True";
             services.AddDbContext<AccountContext>(options => options.UseSqlServer(connection));
         }
 
