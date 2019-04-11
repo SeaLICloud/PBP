@@ -3,49 +3,55 @@
 @{
     ViewData["Title"] = "Index";
 }
-
 <section class="content">
     <div class="row">
         <div class="col-xs-12">
             <div class="box-header">
-                <a asp-action="Create" class="btn btn-primary">添加</a>
+                <a asp-action="Create" class="btn bg-gray-active btn-sm">添加</a>
             </div>
-            <div class="box box-widget">
-                <div class="box-body box-info">
-                    <table id="example2" class="table table-bordered table-hover">
-                        <thead>
-                        <tr class="danger">
-                            <th>账户</th>
-                            <th>创建时间</th>
-                            <th>更新时间</th>
-                            <th>操作</th>
-                        </tr>
-                        </thead>
-                        <tbody>
+            @* <div class="box box-widget"> *@
+            <div class="box-body box-info">
+                <table id="example2" class="table table-bordered table-hover">
+                    <thead>
+                    <tr class="info">
+                        <th>账户</th>
+                        <th>创建时间</th>
+                        <th>更新时间</th>
+                        <th>操作</th>
+                    </tr>
+                    </thead>
+                    <tbody>
 
-                        @foreach (var item in Model)
-                        {
-                            <tr class="info">
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.UserName)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.CreateTime)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.UpdateTime)
-                                </td>
-                                <td>
-                                    <a asp-action="Edit" asp-route-id="@item.Guid">编辑</a> |
-                                    <a asp-action="Details" asp-route-id="@item.Guid">详情</a> |
-                                    <a asp-action="Delete" asp-route-id="@item.Guid">删除</a>
-                                </td>
-                            </tr>
-                        }
-                        </tbody>
-                    </table>
-                </div>
+                    @foreach (var item in Model)
+                    {
+                        <tr class="">
+                            <td>
+                                @Html.DisplayFor(modelItem => item.UserName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.CreateTime)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.UpdateTime)
+                            </td>
+                            <td>
+                                <a asp-action="Edit" asp-route-id="@item.Guid" class="btn btn-default btn-xs">修改密码</a>
+                                <a asp-action="Delete" asp-route-id="@item.Guid" class="btn btn-danger btn-xs">删除</a>
+                            </td>
+                        </tr>
+                    }
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>
+    @* </div> *@
 </section>
+
+
+
+
+
+
+
+

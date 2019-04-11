@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -26,7 +27,15 @@ namespace PBP.Web
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
-            var connection = @"Data Source=.;Initial Catalog=PBPDB;Integrated Security=True";
+
+            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+                .AddCookie(CookieAuthenticationDefaults.AuthenticationScheme, o =>
+                {
+                    o.LoginPath = new PathString("/Account/Login");
+                    o.AccessDeniedPath = new PathString("/Error/Forbidden");
+                });
+
+            var connection = @"Data Source=.\SQLEXPRESS;Initial Catalog=PBPDB;Integrated Security=True";
             services.AddDbContext<AccountContext>(options => options.UseSqlServer(connection));
         }
 
@@ -45,12 +54,12 @@ namespace PBP.Web
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseCookiePolicy();
-
+            app.UseAuthentication();
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
                     "default",
-                    "{controller=Account}/{action=Index}/{id?}");
+                    "{controller=Account}/{action=Login}/{id?}");
             });
         }
     }

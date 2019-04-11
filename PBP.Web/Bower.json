@@ -6,7 +6,8 @@
     "iCheck": "1.0.2",
     "layer": "*",
     "jquery.cookie": "1.4.1",
-    "jstree": "3.3.0"
+    "jstree": "3.3.0",
+    "jquery-validation": "1.16.0"
   },
   "resolutions": {
     "jquery": "^3.2.1"

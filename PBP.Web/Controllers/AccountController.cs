@@ -29,8 +29,7 @@ namespace PBP.Web.Controllers
                 return NotFound();
             }
 
-            var account = await context.Accounts
-                .FirstOrDefaultAsync(m => m.Guid == id);
+            var account = await context.Accounts.FirstOrDefaultAsync(m => m.Guid == id);
             if (account == null)
             {
                 return NotFound();
@@ -38,6 +37,7 @@ namespace PBP.Web.Controllers
 
             return View(account);
         }
+
 
         public IActionResult Create()
         {
@@ -137,5 +137,49 @@ namespace PBP.Web.Controllers
         {
             return context.Accounts.Any(e => e.Guid == id);
         }
+
+        public IActionResult Register()
+        {
+            return View();
+        }
+
+        [HttpPost, ActionName("Register")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Register([Bind("Guid,UserName,Password,CreateTime,UpdateTime")] Account account)
+        {
+            if (ModelState.IsValid)
+            {
+                account.Guid = Guid.NewGuid();
+                account.CreateTime = DateTime.Now;
+                account.UpdateTime = DateTime.Now;
+                context.Add(account);
+                await context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
+            }
+            return View(account);
+        }
+
+        public IActionResult Login()
+        {
+            return View();
+        }
+
+        [HttpPost, ActionName("Login")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Login([Bind("UserName,Password")] Account account)
+        {
+            if (ModelState.IsValid)
+            {
+                var result = await context.Accounts
+                    .Where(a => (a.UserName == account.UserName && a.Password == account.Password))
+                    .SingleAsync();
+                if (result != null)
+                {
+                    return RedirectToAction(nameof(Index));
+                } 
+            }
+            return View(account);
+        }
+
     }
 }

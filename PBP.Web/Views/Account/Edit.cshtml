@@ -1,44 +1,42 @@
 ﻿@model PBP.Web.Models.Domain.Account
 
 @{
-    ViewData["Title"] = "Edit";
+    ViewData["Title"] = "修改密码";
 }
-
-<h2>Edit</h2>
-
-<h4>Account</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Edit">
+<div class="col-md-12">
+    <div class="box box-primary">
+        <div class="box-header with-border">
+            <h3 class="box-title">修改密码</h3>
+        </div>
+        <form asp-action="Edit" class="form-horizontal ">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="UserName" class="control-label"></label>
-                <input asp-for="UserName" class="form-control" />
-                <span asp-validation-for="UserName" class="text-danger"></span>
+            <div class="box-body">
+                <div class="form-group">
+                    <label asp-for="UserName" class="control-label col-sm-2">用户姓名</label>
+                    <div class="col-sm-6">
+                        <input asp-for="UserName" class="form-control" readonly="readonly" />
+                    </div>
+                    <span asp-validation-for="UserName" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Password" class="control-label col-sm-2">用户密码</label>
+                    <div class="col-sm-6">
+                        <input asp-for="Password" class="form-control" placeholder="Password"/>
+                    </div>
+                    <span asp-validation-for="Password" class="text-danger"></span>
+                </div>
+                <input type="hidden" asp-for="Guid"/>
             </div>
-            <div class="form-group">
-                <label asp-for="Password" class="control-label"></label>
-                <input asp-for="Password" class="form-control" />
-                <span asp-validation-for="Password" class="text-danger"></span>
-            </div>
-            <input type="hidden" asp-for="Guid" />
-            <div class="form-group">
-                <label asp-for="CreateTime" class="control-label"></label>
-                <input asp-for="CreateTime" class="form-control" />
-                <span asp-validation-for="CreateTime" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-default" />
+            <div class="box-footer">
+
+                <a asp-action="Index" class="btn btn-default btn-sm">返回</a>
+                <input type="submit" value="确认" class="btn btn-primary pull-right btn-sm"/>
+
             </div>
         </form>
     </div>
 </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
-
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
 }
