@@ -9,12 +9,11 @@
             <div class="box-header">
                 <a asp-action="Create" class="btn bg-gray-active btn-sm">添加</a>
             </div>
-            @* <div class="box box-widget"> *@
             <div class="box-body box-info">
                 <table id="example2" class="table table-bordered table-hover">
                     <thead>
                     <tr class="info">
-                        <th>账户</th>
+                        <th>账户名</th>
                         <th>创建时间</th>
                         <th>更新时间</th>
                         <th>操作</th>
@@ -35,8 +34,13 @@
                                 @Html.DisplayFor(modelItem => item.UpdateTime)
                             </td>
                             <td>
-                                <a asp-action="Edit" asp-route-id="@item.Guid" class="btn btn-default btn-xs">修改密码</a>
-                                <a asp-action="Delete" asp-route-id="@item.Guid" class="btn btn-danger btn-xs">删除</a>
+                                @Html.ActionLink("重置密码", "ResetPassword",
+                                    new {id = item.Guid},
+                                    new { @class = "btn btn-default btn-xs", onclick = "return confirm('您确定要重置此账户密码?')"})
+                                @Html.ActionLink("删除", "Delete",
+                                    new {id = item.Guid},
+                                    new { @class = "btn btn-danger btn-xs", onclick = "return confirm('您确定要删除此账户,删除后将不能找回?')"})
+                                @* <a asp-action="Delete" asp-route-id="@item.Guid" class="btn btn-danger btn-xs">删除</a> *@
                             </td>
                         </tr>
                     }
@@ -45,7 +49,6 @@
             </div>
         </div>
     </div>
-    @* </div> *@
 </section>
 
 

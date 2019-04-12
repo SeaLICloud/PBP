@@ -1,8 +1,10 @@
-﻿@model PBP.Web.Models.Domain.Account
+﻿@using PBP.Web.Common
+@model PBP.Web.Models.Domain.Account
 
 @{
     Layout = null;
     ViewData["Title"] = "用户注册";
+    var err = ViewData[VKey.ACCOUNTEXIST] ?? string.Empty;
 }
 
 <html>
@@ -55,6 +57,7 @@
                 <div class="form-group has-feedback">
                     <input type="password" class="form-control" id="passTwo" required placeholder="确认密码">
                     <span class="glyphicon glyphicon-log-in form-control-feedback"></span>
+                    <span id="tip" style="color:#F00">@err</span>
                 </div>
                 <div class="row">
                     <div class="col-xs-12">
@@ -89,6 +92,10 @@
             radioClass: 'iradio_square-blue',
             increaseArea: '20%'
         });
+    });
+
+    $("input").focus(function () {
+        $("#tip").html("");
     });
 
 </script>
