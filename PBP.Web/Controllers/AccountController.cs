@@ -22,9 +22,52 @@ namespace PBP.Web.Controllers
             return context.Accounts.Any(a => a.UserName == account.UserName);
         }
 
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(
+            string sortOrder,
+            string currentFilter,
+            string searchString,
+            int? pageNumber)
         {
-            return View(await context.Accounts.ToListAsync());
+            ViewData["CurrentSort"] = sortOrder;
+            ViewData["NameSortParm"] = string.IsNullOrEmpty(sortOrder) ? "name_desc" : string.Empty;
+            ViewData["DateSortParm"] = sortOrder == "Date" ? "date_desc" : "Date";
+            ViewData["Total"] = context.Accounts.Count();
+            ViewData["CurrentPage"] = pageNumber;
+
+            if (searchString != null)
+            {
+                pageNumber = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
+            }
+
+            ViewData["CurrentFilter"] = searchString;
+            var accounts = context.Accounts.Select(a => a);
+            if (!string.IsNullOrEmpty(searchString))
+            {
+                accounts = accounts.Where(s => s.UserName.Contains(searchString));
+            }
+
+            switch (sortOrder)
+            {
+                case "name_desc":
+                    accounts = accounts.OrderByDescending(s => s.UserName);
+                    break;
+                case "Date":
+                    accounts = accounts.OrderBy(s => s.CreateTime);
+                    break;
+                case "date_desc":
+                    accounts = accounts.OrderByDescending(s => s.CreateTime);
+                    break;
+                default:
+                    accounts = accounts.OrderBy(s => s.UserName);
+                    break;
+            }
+           
+            var pageSize = Key.PageSize;
+            return View(await PaginatedList<Account>.CreateAsync(accounts.AsNoTracking(), pageNumber ?? 1, pageSize));
         }
 
         public IActionResult Create()
@@ -60,6 +103,7 @@ namespace PBP.Web.Controllers
                 return NotFound();
             }
             account.Password = Key.DefaultPwd;
+            account.UpdateTime = DateTime.Now;
             context.Accounts.Update(account);
             await context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));

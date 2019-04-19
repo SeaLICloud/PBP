@@ -3,6 +3,7 @@
     public static class Key
     {
         public const string DefaultPwd = "123456";
+        public const int PageSize = 8;
     }
 
     public static class CKey
