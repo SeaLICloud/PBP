@@ -5,7 +5,7 @@
 }
 
 <div class="col-md-12">
-    <div class="box box-primary">
+    <div class="box box-default">
         <div class="box-header with-border">
             <h3 class="box-title">新建用户</h3>
         </div>
@@ -22,7 +22,7 @@
                 <div class="form-group">
                     <label asp-for="Password" class="control-label col-sm-2">用户密码</label>
                     <div class="col-sm-6">
-                        <input asp-for="Password" class="form-control"/>
+                        <input asp-for="Password" type="password" class="form-control"/>
                     </div>
                     <span asp-validation-for="Password" class="text-danger"></span>
                 </div>

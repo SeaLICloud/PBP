@@ -8,19 +8,16 @@
 }
 
 <section class="content-header">
-    <h1>
-        账户列表
-        <small>User List Info</small>
-    </h1>
-    <ol class="breadcrumb">
-        <li>
-            <a href="#"><i class="fa fa-th"></i> 系统主页</a>
-        </li>
-        <li>
-            <a href="#">基础数据</a>
-        </li>
-        <li class="active">用户管理</li>
-    </ol>
+    <div style="font-size: 20px">账户列表</div>
+        <ol class="breadcrumb">
+            <li>
+                <a href="#"><i class="fa fa-th-large"></i>系统主页</a>
+            </li>
+            <li>
+                <a href="#">基础数据</a>
+            </li>
+            <li class="active">用户管理</li>
+        </ol>
 </section>
 
 <section class="content">
@@ -30,9 +27,8 @@
 
                 <div class="box-header">
                     <div class="row">
-
                         <div class="col-xs-10">
-                            <a asp-action="Create" class="btn bg-gray btn-sm">添加</a>
+                            <a asp-action="Create" class="btn btn-default btn-sm glyphicon glyphicon-plus">添加</a>
                         </div>
                         <div class="col-xs-2">
                             <form asp-action="Index" method="get">
@@ -151,8 +147,8 @@
                 <p>您确定要重置此账户密码?</p>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default pull-left" data-dismiss="modal">关闭</button>
-                <a id="confirmReset" class="btn btn-danger" href="">确认</a>
+                <button type="button" class="btn btn-default pull-left btn-sm" data-dismiss="modal">关闭</button>
+                <a id="confirmReset" class="btn btn-danger btn-sm" href="">确认</a>
             </div>
         </div>
     </div>
@@ -171,8 +167,8 @@
                 <p>您确定要删除此账户,删除后将不能找回?</p>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default pull-left" data-dismiss="modal">关闭</button>
-                <a id="confirmDelete" class="btn btn-danger" href="">确认</a>
+                <button type="button" class="btn btn-default pull-left btn-sm" data-dismiss="modal">关闭</button>
+                <a id="confirmDelete" class="btn btn-danger btn-sm" href="">确认</a>
             </div>  
         </div>
     </div>
