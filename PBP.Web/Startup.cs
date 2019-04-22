@@ -37,6 +37,7 @@ namespace PBP.Web
 
             var connection = @"Data Source=.\SQLEXPRESS;Initial Catalog=PBPDB;Integrated Security=True";
             services.AddDbContext<AccountContext>(options => options.UseSqlServer(connection));
+            services.AddDbContext<OrganizationContext>(options => options.UseSqlServer(connection));
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)

@@ -31,9 +31,7 @@ namespace PBP.Web.Controllers
             ViewData["CurrentSort"] = sortOrder;
             ViewData["NameSortParm"] = string.IsNullOrEmpty(sortOrder) ? "name_desc" : string.Empty;
             ViewData["DateSortParm"] = sortOrder == "Date" ? "date_desc" : "Date";
-
             ViewData["Total"] = context.Accounts.Count();
-
             ViewData["CurrentPage"] = pageNumber;
 
             if (searchString != null)
