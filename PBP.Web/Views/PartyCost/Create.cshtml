@@ -1,0 +1,88 @@
+﻿@model PBP.Web.Models.Domain.PartyCost
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h2>Create</h2>
+
+<h4>PartyCost</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="PartyCostID" class="control-label"></label>
+                <input asp-for="PartyCostID" class="form-control" />
+                <span asp-validation-for="PartyCostID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PartyMemberID" class="control-label"></label>
+                <input asp-for="PartyMemberID" class="form-control" />
+                <span asp-validation-for="PartyMemberID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PostWage" class="control-label"></label>
+                <input asp-for="PostWage" class="form-control" />
+                <span asp-validation-for="PostWage" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SalaryRankWage" class="control-label"></label>
+                <input asp-for="SalaryRankWage" class="form-control" />
+                <span asp-validation-for="SalaryRankWage" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Allowance" class="control-label"></label>
+                <input asp-for="Allowance" class="form-control" />
+                <span asp-validation-for="Allowance" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PerformanceWage" class="control-label"></label>
+                <input asp-for="PerformanceWage" class="form-control" />
+                <span asp-validation-for="PerformanceWage" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="UnionCost" class="control-label"></label>
+                <input asp-for="UnionCost" class="form-control" />
+                <span asp-validation-for="UnionCost" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MedicalInsurance" class="control-label"></label>
+                <input asp-for="MedicalInsurance" class="form-control" />
+                <span asp-validation-for="MedicalInsurance" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="UnemploymentInsurance" class="control-label"></label>
+                <input asp-for="UnemploymentInsurance" class="form-control" />
+                <span asp-validation-for="UnemploymentInsurance" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="OldAgeInsurance" class="control-label"></label>
+                <input asp-for="OldAgeInsurance" class="form-control" />
+                <span asp-validation-for="OldAgeInsurance" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="JobAnnuity" class="control-label"></label>
+                <input asp-for="JobAnnuity" class="form-control" />
+                <span asp-validation-for="JobAnnuity" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="IndividualIncomeTax" class="control-label"></label>
+                <input asp-for="IndividualIncomeTax" class="form-control" />
+                <span asp-validation-for="IndividualIncomeTax" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

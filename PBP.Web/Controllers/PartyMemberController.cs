@@ -103,7 +103,7 @@ namespace PBP.Web.Controllers
             if (ModelState.IsValid)
             {
                 partyMember.Guid = Guid.NewGuid();
-                partyMember.PartyMemberID = new SeriaNumber().Seria(context.PartyMembers.Count() + 1);
+                partyMember.PartyMemberID = new SeriaNumber().Seria(context.PartyMembers.Count() + 1,Key.PMPre);
                 partyMember.Stage = PartyMember.DevelopmentStage.NotInput;
                 partyMember.CreateTime=DateTime.Now;
                 partyMember.UpdateTime=DateTime.Now;
@@ -205,7 +205,6 @@ namespace PBP.Web.Controllers
             await context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
-
 
         public async Task<IActionResult> Delete(Guid? id)
         {

@@ -1,0 +1,113 @@
+﻿@model IEnumerable<PBP.Web.Models.Domain.PartyCost>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.PartyCostID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PartyMemberID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PostWage)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SalaryRankWage)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Allowance)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PerformanceWage)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UnionCost)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MedicalInsurance)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UnemploymentInsurance)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OldAgeInsurance)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.JobAnnuity)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IndividualIncomeTax)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CreateTime)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UpdateTime)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.PartyCostID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PartyMemberID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PostWage)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SalaryRankWage)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Allowance)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PerformanceWage)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UnionCost)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MedicalInsurance)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UnemploymentInsurance)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OldAgeInsurance)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.JobAnnuity)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IndividualIncomeTax)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CreateTime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UpdateTime)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Guid">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Guid">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Guid">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

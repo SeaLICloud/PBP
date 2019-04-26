@@ -17,6 +17,9 @@
         public static string CurrentRole = "CurrentRole";
         public static string CurrentEmail = "CurrentRole";
         public const string Admin = "Admin";
+        public const string OrgPre = "OG";
+        public const string PMPre = "PM";
+        public const string PCPre = "PC";
     }
 
     public static class CKey
@@ -39,6 +42,10 @@
 
     public static class PKey
     {
-        public const string PMPram = "PartyMemberID,Name,Sex,IDCard,Birthday,National,Phone,Adress,Stage,BeginDate,PrepareDate,FormalDate,OrgID,State,Guid,CreateTime,UpdateTime";
+        public const string PMPram = 
+            "PartyMemberID,Name,Sex,IDCard,Birthday,National,Phone,Adress,Stage,BeginDate,PrepareDate,FormalDate,OrgID,State,Guid,CreateTime,UpdateTime";
+
+        public const string PCPram =
+            "PartyCostID,PartyMemberID,PostWage,SalaryRankWage,Allowance,PerformanceWage,UnionCost,MedicalInsurance,UnemploymentInsurance,OldAgeInsurance,JobAnnuity,IndividualIncomeTax,Guid,CreateTime,UpdateTime";
     }
 }

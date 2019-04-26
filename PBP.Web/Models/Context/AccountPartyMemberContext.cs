@@ -17,10 +17,10 @@ namespace PBP.Web.Models.Context
                 .HasKey(aP => aP.Guid);
 
             modelBuilder.Entity<AccountPartyMember>()
-                .HasAlternateKey(aP => aP.AccountID);
+                .Property(aP => aP.AccountID);
 
             modelBuilder.Entity<AccountPartyMember>()
-                .HasAlternateKey(aP => aP.PartyMemberID);
+                .Property(aP => aP.PartyMemberID);
 
             modelBuilder.Entity<AccountPartyMember>()
                 .Property(account => account.CreateTime)

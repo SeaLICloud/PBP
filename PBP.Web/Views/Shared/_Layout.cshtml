@@ -3,10 +3,6 @@
 @using PBP.Web.Models.Domain
 @{
     var currentUser = Context.User.Claims.First(x => x.Type == ClaimTypes.Name).Value;
-
-//    var currentRole = Common.GetEnumDisplay(
-//        (UserRole)Enum.Parse(typeof(UserRole),
-//        Context.User.Claims.First(x => x.Type == ClaimTypes.Role).Value));
     var currentRole = Context.User.Claims.First(x => x.Type == ClaimTypes.Role).Value;
 }
 <!DOCTYPE html>
@@ -26,7 +22,6 @@
     <link href="~/lib/jvectormap/jquery-jvectormap.css" rel="stylesheet" />
     <link href="~/lib/admin-lte/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.css" rel="stylesheet" />
     <link rel="stylesheet" href="~/lib/jstree/dist/themes/default/style.min.css">
-
     <link href="~/lib/admin-lte/dist/css/alt/AdminLTE-select2.css" rel="stylesheet" />
     <link href="~/lib/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet" />
     <link href="~/lib/admin-lte/plugins/timepicker/bootstrap-timepicker.min.css" rel="stylesheet" />
@@ -151,8 +146,8 @@
                                 </span>
                             </a>
                             <ul class="treeview-menu">
-                                <li><a href="#"><i class="fa fa-history"></i>党费缴纳</a></li>
-                                <li><a href="#"><i class="fa fa-history"></i>党费记录</a></li>
+                                <li><a asp-controller="PartyCost" asp-action="Index"><i class="fa fa-money"></i>党员党费</a></li>
+                                <li><a href="#"><i class="fa fa-history"></i>缴纳记录</a></li>
                             </ul>
                         </li>
 

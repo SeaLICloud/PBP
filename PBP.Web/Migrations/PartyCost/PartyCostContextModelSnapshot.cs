@@ -6,10 +6,10 @@ using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PBP.Web.Models.Context;
 
-namespace PBP.Web.Migrations.AccountPartyMember
+namespace PBP.Web.Migrations.PartyCost
 {
-    [DbContext(typeof(AccountPartyMemberContext))]
-    partial class AccountPartyMemberContextModelSnapshot : ModelSnapshot
+    [DbContext(typeof(PartyCostContext))]
+    partial class PartyCostContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)
         {
@@ -19,18 +19,41 @@ namespace PBP.Web.Migrations.AccountPartyMember
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("PBP.Web.Models.Domain.AccountPartyMember", b =>
+            modelBuilder.Entity("PBP.Web.Models.Domain.PartyCost", b =>
                 {
                     b.Property<Guid>("Guid")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("AccountID");
+                    b.Property<decimal>("Allowance");
 
                     b.Property<DateTime>("CreateTime")
                         .ValueGeneratedOnAdd()
                         .HasDefaultValueSql("GETDATE()");
 
+                    b.Property<decimal>("IndividualIncomeTax");
+
+                    b.Property<decimal>("JobAnnuity");
+
+                    b.Property<decimal>("MedicalInsurance");
+
+                    b.Property<decimal>("OldAgeInsurance");
+
+                    b.Property<string>("PartyCostID")
+                        .IsRequired();
+
                     b.Property<string>("PartyMemberID");
+
+                    b.Property<decimal>("PerformanceWage");
+
+                    b.Property<decimal>("PostWage");
+
+                    b.Property<decimal>("SalaryRankWage");
+
+                    b.Property<int>("State");
+
+                    b.Property<decimal>("UnemploymentInsurance");
+
+                    b.Property<decimal>("UnionCost");
 
                     b.Property<DateTime>("UpdateTime")
                         .ValueGeneratedOnAddOrUpdate()
@@ -38,7 +61,9 @@ namespace PBP.Web.Migrations.AccountPartyMember
 
                     b.HasKey("Guid");
 
-                    b.ToTable("AccountPartyMembers");
+                    b.HasAlternateKey("PartyCostID");
+
+                    b.ToTable("PartyCosts");
                 });
 #pragma warning restore 612, 618
         }

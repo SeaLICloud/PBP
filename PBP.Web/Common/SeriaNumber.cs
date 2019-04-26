@@ -1,30 +1,37 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace PBP.Web.Common
+﻿namespace PBP.Web.Common
 {
     public class SeriaNumber
     {
-        public string Seria(int number)
+        public string Seria(int number,string pre)
         {
             if (number == 0)
             {
-                return "001";
+                return pre + "000001";
             }
             else if (number < 10 && number > 0)
             {
-                return "00" + number;
+                return pre+ "00000" + number;
             }
-
             else if (number < 100 && number > 9)
             {
-                return "0" + number;
+                return pre + "0000" + number;
+            }
+            else if(number < 1000 && number > 99)
+            {
+                return pre + "000" + number;
+            }
+
+            else if (number < 10000 && number > 999)
+            {
+                return pre + "00" + number;
+            }
+            else if (number < 100000 && number > 9999)
+            {
+                return pre + "0" + number;
             }
             else
             {
-                return number.ToString();
+                return pre + number;
             }
         }
     }

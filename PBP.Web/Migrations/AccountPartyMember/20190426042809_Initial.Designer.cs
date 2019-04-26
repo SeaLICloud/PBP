@@ -10,7 +10,7 @@ using PBP.Web.Models.Context;
 namespace PBP.Web.Migrations.AccountPartyMember
 {
     [DbContext(typeof(AccountPartyMemberContext))]
-    [Migration("20190426033002_Initial")]
+    [Migration("20190426042809_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -26,26 +26,19 @@ namespace PBP.Web.Migrations.AccountPartyMember
                     b.Property<Guid>("Guid")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("AccountID")
-                        .IsRequired();
+                    b.Property<string>("AccountID");
 
                     b.Property<DateTime>("CreateTime")
                         .ValueGeneratedOnAdd()
                         .HasDefaultValueSql("GETDATE()");
 
-                    b.Property<string>("PartyMemberID")
-                        .IsRequired();
+                    b.Property<string>("PartyMemberID");
 
                     b.Property<DateTime>("UpdateTime")
                         .ValueGeneratedOnAddOrUpdate()
                         .HasDefaultValueSql("GETDATE()");
 
                     b.HasKey("Guid");
-
-                    b.HasAlternateKey("AccountID");
-
-
-                    b.HasAlternateKey("PartyMemberID");
 
                     b.ToTable("AccountPartyMembers");
                 });

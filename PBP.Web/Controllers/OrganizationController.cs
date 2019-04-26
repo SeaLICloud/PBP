@@ -31,11 +31,11 @@ namespace PBP.Web.Controllers
             string searchString,
             int? pageNumber)
         {
-            ViewData["CurrentSort"] = sortOrder;
-            ViewData["NameSortParm"] = string.IsNullOrEmpty(sortOrder) ? "name_desc" : string.Empty;
-            ViewData["DateSortParm"] = sortOrder == "Date" ? "date_desc" : "Date";
-            ViewData["Total"] = context.Organizations.Count();
-            ViewData["CurrentPage"] = pageNumber;
+            ViewData[Key.CurrentSort] = sortOrder;
+            ViewData[Key.NameSortParm] = string.IsNullOrEmpty(sortOrder) ? Key.NameDesc : string.Empty;
+            ViewData[Key.DateSortParm] = sortOrder == Key.Date ? Key.DateDesc : Key.Date;
+            ViewData[Key.Total] = context.Organizations.Count();
+            ViewData[Key.CurrentPage] = pageNumber;
 
             if (searchString != null)
             {
@@ -45,12 +45,12 @@ namespace PBP.Web.Controllers
             {
                 searchString = currentFilter;
             }
-            ViewData["CurrentFilter"] = searchString;
+            ViewData[Key.CurrentFilter] = searchString;
             var organizations = context.Organizations.Select(o => o);
             if (!string.IsNullOrEmpty(searchString))
             {
                 organizations = organizations.Where(s => s.Name.Contains(searchString));
-                ViewData["Total"] = organizations.Count();
+                ViewData[Key.Total] = organizations.Count();
             }
             organizations = organizations.OrderByDescending(s => s.CreateTime);
             var pageSize = Key.PageSize;
@@ -72,7 +72,7 @@ namespace PBP.Web.Controllers
                 organization.Guid = Guid.NewGuid();
                 organization.CreateTime = DateTime.Now;
                 organization.UpdateTime = DateTime.Now;
-                organization.OrgID = new SeriaNumber().Seria(context.Organizations.Count() + 1);
+                organization.OrgID = new SeriaNumber().Seria(context.Organizations.Count() + 1,Key.OrgPre);
 
                 context.Add(organization);
                 await context.SaveChangesAsync();
