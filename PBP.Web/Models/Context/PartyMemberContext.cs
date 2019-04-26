@@ -5,7 +5,7 @@ namespace PBP.Web.Models.Context
 {
     public class PartyMemberContext: DbContext
     {
-        public PartyMemberContext(DbContextOptions options) : base(options)
+        public PartyMemberContext(DbContextOptions<PartyMemberContext> options) : base(options)
         {
         }
         public DbSet<PartyMember> PartyMembers { get; set; }
@@ -55,7 +55,7 @@ namespace PBP.Web.Models.Context
                 .Property(pM => pM.FormalDate);
 
             modelBuilder.Entity<PartyMember>()
-                .Property(pM => pM.OrgID);                  
+                .Property(pM => pM.OrgID);
         }
     }
 }

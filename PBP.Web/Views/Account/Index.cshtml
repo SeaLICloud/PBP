@@ -54,10 +54,13 @@
                                                     用户名
                                                     <a class="fa fa-arrows-v" asp-action="Index" asp-route-sortOrder="@ViewData["NameSortParm"]"></a>
                                                 </th>
+                                                <th tabindex="0" aria-controls="example2" rowspan="1" colspan="1">邮箱</th>
+                                                <th tabindex="0" aria-controls="example2" rowspan="1" colspan="1">角色</th>
                                                 <th tabindex="0" aria-controls="example2" rowspan="1" colspan="1">
                                                     创建时间
                                                     <a class="fa fa-arrows-v" asp-action="Index" asp-route-sortOrder="@ViewData["DateSortParm"]"></a>
                                                 </th>
+
                                                 <th tabindex="0" aria-controls="example2" rowspan="1" colspan="1">更新时间</th>
                                                 <th tabindex="0" aria-controls="example2" rowspan="1" colspan="1">操作</th>
                                             </tr>
@@ -69,6 +72,12 @@
                                                 <tr>
                                                     <td>
                                                         @Html.DisplayFor(modelItem => item.UserName)
+                                                    </td>
+                                                    <td>
+                                                        @Html.DisplayFor(modelItem => item.Email)
+                                                    </td>
+                                                    <td>
+                                                        @Html.DisplayFor(modelItem => item.Role)
                                                     </td>
                                                     <td>
                                                         @Html.DisplayFor(modelItem => item.CreateTime)
@@ -83,7 +92,7 @@
                                                             重置密码
                                                         </button>
                                                         <button id="deleteEntity" type="button"
-                                                                class="btn btn-danger btn-xs" data-toggle="modal"
+                                                                class="btn btn-danger btn-xs" data-toggle="modal" 
                                                                 data-target="#modal-default-delete"
                                                                 onclick="getDeleteId(@id)">
                                                             删除
@@ -96,7 +105,6 @@
 
                                 </div>
                             </div>
-
 
                             <div class="row">
 

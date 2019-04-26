@@ -19,6 +19,15 @@
                     </div>
                     <span asp-validation-for="UserName" class="text-danger"></span>
                 </div>
+                
+                <div class="form-group">
+                    <label asp-for="Email" class="control-label col-sm-2">用户邮箱</label>
+                    <div class="col-sm-6">
+                        <input asp-for="Email" type="text" class="form-control"/>
+                    </div>
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                </div>
+
                 <div class="form-group">
                     <label asp-for="Password" class="control-label col-sm-2">用户密码</label>
                     <div class="col-sm-6">
@@ -26,6 +35,7 @@
                     </div>
                     <span asp-validation-for="Password" class="text-danger"></span>
                 </div>
+                
             </div>
             <div class="box-footer">
                 <a asp-action="Index" class="btn btn-default btn-sm">返回</a>

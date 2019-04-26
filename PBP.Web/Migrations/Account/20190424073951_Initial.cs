@@ -15,7 +15,9 @@ namespace PBP.Web.Migrations.Account
                     CreateTime = table.Column<DateTime>(nullable: false, defaultValueSql: "GETDATE()"),
                     UpdateTime = table.Column<DateTime>(nullable: false, defaultValueSql: "GETDATE()"),
                     UserName = table.Column<string>(nullable: false),
-                    Password = table.Column<string>(nullable: true)
+                    Password = table.Column<string>(nullable: false),
+                    Role = table.Column<int>(nullable: false),
+                    Email = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {

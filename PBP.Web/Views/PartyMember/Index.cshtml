@@ -1,0 +1,316 @@
+﻿@using PBP.Web.Models.Domain
+@model PBP.Web.Common.PaginatedList<PBP.Web.Models.Domain.PartyMember>
+@{
+    ViewData["Title"] = "Index";
+    var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
+    var nextDisabled = !Model.HasNextPage ? "disabled" : "";
+    var currentPage = ViewData["CurrentPage"] == null ? "1" : ViewData["CurrentPage"].ToString();
+}
+
+
+<section class="content-header">
+    <div style="font-size: 20px">党员列表</div>
+    <ol class="breadcrumb">
+        <li>
+            <a href="#"><i class="fa fa-th-large"></i>系统主页</a>
+        </li>
+        <li>
+            <a href="#">基础数据</a>
+        </li>
+        <li class="active">组织管理</li>
+    </ol>
+</section>
+
+<section class="content">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="box">
+
+                <div class="box-header">
+                    <div class="row">
+                        <div class="col-xs-10">
+                            <a asp-action="Create" class="btn btn-default btn-sm glyphicon glyphicon-plus">添加</a>
+                        </div>
+                        <div class="col-xs-2">
+                            <form asp-action="Index" method="get">
+                                <div class="input-group input-group-sm right">
+                                    <input type="text" name="SearchString" class="form-control" value="@ViewData["currentFilter"]" placeholder="请输入党员姓名...">
+                                    <span class="input-group-btn">
+                                        <button type="submit" value="Search" class="btn btn-info btn-flat fa fa-search">查询</button>
+                                    </span>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="box-body">
+                    <div id="example2_wrapper" class="dataTables_wrapper form-inline">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <table id="example2" class="table table-bordered table-hover dataTable" role="grid" aria-describedby="example2_info">
+                                    <thead>
+                                    <tr role="row">
+
+                                        <th tabindex="0" aria-controls="example2" rowspan="1" colspan="1">党员代码</th>
+                                        <th tabindex="0" aria-controls="example2" rowspan="1" colspan="1">姓名</th>
+                                        <th tabindex="0" aria-controls="example2" rowspan="1" colspan="1">性别</th>
+                                        <th tabindex="0" aria-controls="example2" rowspan="1" colspan="1">身份证号</th>
+                                        <th tabindex="0" aria-controls="example2" rowspan="1" colspan="1">发展阶段</th>
+                                        <th tabindex="0" aria-controls="example2" rowspan="1" colspan="1">发展进程</th>
+                                        <th tabindex="0" aria-controls="example2" rowspan="1" colspan="1">操作</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    @foreach (var item in Model)
+                                    {
+                                        var id = "'" + item.Guid + "'";
+                                        <tr>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.PartyMemberID)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.Name)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.Sex)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.IDCard)
+                                            </td>
+
+                                            <td>
+                                                <a href="#"><small class="label bg-teal">
+                                                    @Html.DisplayFor(modelItem => item.Stage)
+                                                </small></a>
+                                            </td>
+                                            
+                                            <td>
+
+                                                @{
+                                                    if (item.Stage == PartyMember.DevelopmentStage.NotInput)
+                                                    {
+                                                        <div class="progress progress-sm active">
+                                                            <div class="progress-bar progress-bar-success progress-bar-striped"
+                                                                 role="progressbar"
+                                                                 aria-valuenow="0"
+                                                                 aria-valuemin="0"
+                                                                 aria-valuemax="100"
+                                                                 style="width: 0%">
+                                                            </div>
+                                                        </div>
+                                                    }
+                                                    else if (item.Stage == PartyMember.DevelopmentStage.Activist)
+                                                    {
+                                                        <div class="progress progress-sm active">
+                                                            <div class="progress-bar progress-bar-aqua progress-bar-striped"
+                                                                 role="progressbar"
+                                                                 aria-valuenow="33"
+                                                                 aria-valuemin="0"
+                                                                 aria-valuemax="100"
+                                                                 style="width: 33%">
+                                                            </div>
+                                                        </div>
+                                                    }
+                                                    else if(item.Stage == PartyMember.DevelopmentStage.Prepare)
+                                                    {
+                                                        <div class="progress progress-sm active">
+                                                            <div class="progress-bar progress-bar-primary progress-bar-striped"
+                                                                 role="progressbar"
+                                                                 aria-valuenow="67"
+                                                                 aria-valuemin="0"
+                                                                 aria-valuemax="100"
+                                                                 style="width: 67%">
+                                                            </div>
+                                                        </div>
+                                                    }
+                                                    else
+                                                    {
+                                                        <div class="progress progress-sm active">
+                                                            <div class="progress-bar progress-bar-green progress-bar-striped"
+                                                                 role="progressbar"
+                                                                 aria-valuenow="100"
+                                                                 aria-valuemin="0"
+                                                                 aria-valuemax="100"
+                                                                 style="width: 100%">
+                                                            </div>
+                                                        </div>
+                                                    }
+                                                }
+
+
+                                            </td>
+                                            <td>
+                                                @{
+                                                    if (item.Stage == PartyMember.DevelopmentStage.NotInput)
+                                                    {
+                                                        <button id="deleteEntity" type="button"
+                                                                class="btn btn-github btn-xs" data-toggle="modal"
+                                                                data-target="#modal-default-toact"
+                                                                onclick="gettoactId(@id)">
+                                                            入党
+                                                        </button>
+                                                    }
+                                                    else if (item.Stage == PartyMember.DevelopmentStage.Activist)
+                                                    {
+                                                        <button id="deleteEntity" type="button"
+                                                                class="btn btn-github btn-xs" data-toggle="modal"
+                                                                data-target="#modal-default-topre"
+                                                                onclick="gettopreId(@id)">
+                                                            预备
+                                                        </button>
+                                                    }
+                                                    else if (item.Stage == PartyMember.DevelopmentStage.Prepare)
+                                                    {
+                                                        <button id="deleteEntity" type="button"
+                                                                class="btn btn-github btn-xs" data-toggle="modal"
+                                                                data-target="#modal-default-tofor"
+                                                                onclick="gettoforId(@id)">
+                                                            转正
+                                                        </button>
+                                                    }
+                                                }
+                                                <a asp-action="Edit" asp-route-id="@item.Guid" class="btn btn-info btn-xs">编辑</a>
+                                                <a asp-action="Details" asp-route-id="@item.Guid" class="btn btn-default btn-xs">详情</a>
+                                                <button id="deleteEntity" type="button"
+                                                        class="btn btn-danger btn-xs" data-toggle="modal"
+                                                        data-target="#modal-default-delete"
+                                                        onclick="getDeleteId(@id)">
+                                                    删除
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    }
+                                    </tbody>
+                                </table>
+
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-5">
+                                <div class="dataTables_info" id="example2_info" role="status" aria-live="polite">共 @ViewData["Total"] 条 &nbsp; 第 @currentPage 页</div>
+                            </div>
+                            <div class="col-sm-7">
+                                <div class="dataTables_paginate" id="example2_paginate">
+                                    <ul class="pagination">
+                                        <li class="previous" id="example2_previous">
+                                            <a asp-action="Index"
+                                               asp-route-sortOrder="@ViewData["CurrentSort"]"
+                                               asp-route-pageNumber="@(Model.PageIndex - 1)"
+                                               asp-route-currentFilter="@ViewData["CurrentFilter"]"
+                                               class="btn btn-default btn-sm right @prevDisabled">
+                                                上一页
+                                            </a>
+                                        </li>
+                                        <li class="next" id="example2_next">
+                                            <a asp-action="Index"
+                                               asp-route-sortOrder="@ViewData["CurrentSort"]"
+                                               asp-route-pageNumber="@(Model.PageIndex + 1)"
+                                               asp-route-currentFilter="@ViewData["CurrentFilter"]"
+                                               class="btn btn-default btn-sm right @nextDisabled">
+                                                下一页
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="modal fade" id="modal-default-delete" style="display: none;">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+                <h4 class="modal-title">删除提示</h4>
+            </div>
+            <div class="modal-body">
+                <p>您确定要删除此党员,同时会删除与之相关的账户关联?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default pull-left btn-sm" data-dismiss="modal">关闭</button>
+                <a id="confirmDelete" class="btn btn-danger btn-sm" href="">确认</a>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="modal-default-toact" style="display: none;">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+                <h4 class="modal-title">csm提示</h4>
+            </div>
+            <div class="modal-body">
+                <p>您确定要将此人转为入党积极分子?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default pull-left btn-sm" data-dismiss="modal">关闭</button>
+                <a id="confirmtoact" class="btn btn-danger btn-sm" href="">确认</a>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="modal-default-topre" style="display: none;">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+                <h4 class="modal-title">csm提示</h4>
+            </div>
+            <div class="modal-body">
+                <p>您确定要将此人转为预备党员?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default pull-left btn-sm" data-dismiss="modal">关闭</button>
+                <a id="confirmtopre" class="btn btn-danger btn-sm" href="">确认</a>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="modal-default-tofor" style="display: none;">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+                <h4 class="modal-title">csm提示</h4>
+            </div>
+            <div class="modal-body">
+                <p>您确定要将此人转为正式党员?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default pull-left btn-sm" data-dismiss="modal">关闭</button>
+                <a id="confirmtofor" class="btn btn-danger btn-sm" href="">确认</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function getDeleteId(id) {
+        $("#confirmDelete").attr("href", "/PartyMember/Delete/" + id);
+    }
+    function gettoactId(id) {
+        $("#confirmtoact").attr("href", "/PartyMember/Turn/" + id);
+    }
+    function gettopreId(id) {
+        $("#confirmtopre").attr("href", "/PartyMember/Turn/" + id);
+    }
+    function gettoforId(id) {
+        $("#confirmtofor").attr("href", "/PartyMember/Turn/" + id);
+    }
+</script>

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using PBP.Web.Common;
@@ -9,6 +10,7 @@ using PBP.Web.Models.Domain;
 
 namespace PBP.Web.Controllers
 {
+    [Authorize]
     public class OrganizationController : Controller
     {
         private readonly OrganizationContext context;

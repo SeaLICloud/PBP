@@ -20,7 +20,7 @@ namespace PBP.Web.Models.Context
                 .HasKey(org => org.Guid);
 
             modelBuilder.Entity<Organization>()
-                .HasKey(org => org.OrgID);
+                .HasAlternateKey(org => org.OrgID);
 
             modelBuilder.Entity<Organization>()
                 .Property(org => org.Name);

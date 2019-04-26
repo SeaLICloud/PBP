@@ -1,14 +1,23 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Hosting.Internal;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 using PBP.Web.Common;
 using PBP.Web.Models.Context;
 using PBP.Web.Models.Domain;
 
 namespace PBP.Web.Controllers
 {
+    [Authorize]
     public class AccountController : Controller
     {
         private readonly AccountContext context;
@@ -28,11 +37,16 @@ namespace PBP.Web.Controllers
             string searchString,
             int? pageNumber)
         {
-            ViewData["CurrentSort"] = sortOrder;
-            ViewData["NameSortParm"] = string.IsNullOrEmpty(sortOrder) ? "name_desc" : string.Empty;
-            ViewData["DateSortParm"] = sortOrder == "Date" ? "date_desc" : "Date";
-            ViewData["Total"] = context.Accounts.Count();
-            ViewData["CurrentPage"] = pageNumber;
+            ViewData[Key.CurrentSort] = sortOrder;
+            ViewData[Key.CurrentPage] = pageNumber;
+            ViewData[Key.Total] = context.Accounts.Count();
+            ViewData[Key.NameSortParm] = string.IsNullOrEmpty(sortOrder)
+                ? Key.NameDesc
+                : string.Empty;
+
+            ViewData[Key.DateSortParm] = sortOrder == Key.Date
+                ? Key.NameDesc
+                : Key.Date;
 
             if (searchString != null)
             {
@@ -43,30 +57,29 @@ namespace PBP.Web.Controllers
                 searchString = currentFilter;
             }
 
-            ViewData["CurrentFilter"] = searchString;
+            ViewData[Key.CurrentFilter] = searchString;
             var accounts = context.Accounts.Select(a => a);
             if (!string.IsNullOrEmpty(searchString))
             {
                 accounts = accounts.Where(s => s.UserName.Contains(searchString));
-                ViewData["Total"] = accounts.Count();
+                ViewData[Key.Total] = accounts.Count();
             }
 
             switch (sortOrder)
             {
-                case "name_desc":
+                case Key.NameDesc:
                     accounts = accounts.OrderByDescending(s => s.UserName);
                     break;
-                case "Date":
+                case Key.Date:
                     accounts = accounts.OrderBy(s => s.CreateTime);
                     break;
-                case "date_desc":
+                case Key.DateDesc:
                     accounts = accounts.OrderByDescending(s => s.CreateTime);
                     break;
                 default:
                     accounts = accounts.OrderBy(s => s.UserName);
                     break;
             }
-           
             var pageSize = Key.PageSize;
             return View(await PaginatedList<Account>.CreateAsync(accounts.AsNoTracking(), pageNumber ?? 1, pageSize));
         }
@@ -78,13 +91,14 @@ namespace PBP.Web.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Guid,UserName,Password,CreateTime,UpdateTime")] Account account)
+        public async Task<IActionResult> Create([Bind("Guid,UserName,Password,Role,Email,CreateTime,UpdateTime")] Account account)
         {
             if (ModelState.IsValid)
             {
                 account.Guid = Guid.NewGuid();
                 account.CreateTime = DateTime.Now;
                 account.UpdateTime = DateTime.Now;
+                account.Role = UserRole.Ordinary;
                 context.Add(account);
                 await context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -132,9 +146,10 @@ namespace PBP.Web.Controllers
             return View();
         }
 
+        [AllowAnonymous]
         [HttpPost, ActionName("Register")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Register([Bind("Guid,UserName,Password,CreateTime,UpdateTime")] Account account)
+        public async Task<IActionResult> Register([Bind("Guid,UserName,Password,Role,Email,CreateTime,UpdateTime")] Account account)
         {
             ViewData[VKey.ACCOUNTEXIST] = null;
             if (ModelState.IsValid)
@@ -147,6 +162,7 @@ namespace PBP.Web.Controllers
                 account.Guid = Guid.NewGuid();
                 account.CreateTime = DateTime.Now;
                 account.UpdateTime = DateTime.Now;
+                account.Role = UserRole.Ordinary;
                 context.Add(account);
                 await context.SaveChangesAsync();
 
@@ -155,33 +171,51 @@ namespace PBP.Web.Controllers
             return View(account);
         }
 
+        [AllowAnonymous]
         public IActionResult Login()
         {
             return View();
         }
 
+
         [HttpPost, ActionName("Login")]
         [ValidateAntiForgeryToken]
+        [AllowAnonymous]
         public async Task<IActionResult> Login([Bind("UserName,Password")] Account account)
         {
-            ViewData[VKey.LOGINFAILED] = null;
-            if (ModelState.IsValid)
-            {
-                var fAccount = await context.Accounts
+            ViewData[VKey.LOGINFAILED] = string.Empty;
+            var user = await context.Accounts
                     .FirstOrDefaultAsync(
                         a => a.UserName == account.UserName && 
                              a.Password == account.Password);
-                if (fAccount != null)
+            if (user != null)
                 {
+                    var claims = new List<Claim>
+                    {
+                        new Claim(ClaimTypes.Name, user.UserName),
+                        new Claim(ClaimTypes.Role, Enum.GetName(typeof(UserRole), user.Role)),
+                    };
+                    var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+                    Task.Run(async () =>
+                    {
+                        await HttpContext.SignInAsync(
+                            CookieAuthenticationDefaults.AuthenticationScheme,
+                            new ClaimsPrincipal(claimsIdentity));
+                    }).Wait();
+
                     return RedirectToAction(nameof(Index));
                 }
                 ViewData[VKey.LOGINFAILED] = CKey.UDNOTNULL;
-            }
             return View(account);
         }
 
         public IActionResult LogOut()
         {
+            Task.Run(async () =>
+            {
+                await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+            }).Wait();
+
             return RedirectToAction(nameof(Login));
         }
 

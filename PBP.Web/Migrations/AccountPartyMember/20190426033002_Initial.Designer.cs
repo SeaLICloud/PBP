@@ -7,10 +7,10 @@ using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PBP.Web.Models.Context;
 
-namespace PBP.Web.Migrations.Account
+namespace PBP.Web.Migrations.AccountPartyMember
 {
-    [DbContext(typeof(AccountContext))]
-    [Migration("20181112135520_Initial")]
+    [DbContext(typeof(AccountPartyMemberContext))]
+    [Migration("20190426033002_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -21,29 +21,33 @@ namespace PBP.Web.Migrations.Account
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("PBP.Web.Models.Domain.Account", b =>
+            modelBuilder.Entity("PBP.Web.Models.Domain.AccountPartyMember", b =>
                 {
                     b.Property<Guid>("Guid")
                         .ValueGeneratedOnAdd();
+
+                    b.Property<string>("AccountID")
+                        .IsRequired();
 
                     b.Property<DateTime>("CreateTime")
                         .ValueGeneratedOnAdd()
                         .HasDefaultValueSql("GETDATE()");
 
-                    b.Property<string>("Password");
+                    b.Property<string>("PartyMemberID")
+                        .IsRequired();
 
                     b.Property<DateTime>("UpdateTime")
                         .ValueGeneratedOnAddOrUpdate()
                         .HasDefaultValueSql("GETDATE()");
 
-                    b.Property<string>("UserName")
-                        .IsRequired();
-
                     b.HasKey("Guid");
 
-                    b.HasAlternateKey("UserName");
+                    b.HasAlternateKey("AccountID");
 
-                    b.ToTable("Accounts");
+
+                    b.HasAlternateKey("PartyMemberID");
+
+                    b.ToTable("AccountPartyMembers");
                 });
 #pragma warning restore 612, 618
         }

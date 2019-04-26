@@ -1,0 +1,99 @@
+﻿@using PBP.Web.Models.Domain
+@model PBP.Web.Models.Domain.PartyMember
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<section class="content">
+
+    <div class="row">
+        <div class="col-md-6">
+            <div class="nav-tabs-custom">
+                <ul class="nav nav-tabs">
+                    <li class="active"><a href="#settings" data-toggle="tab" aria-expanded="true">信息详情</a></li>
+                </ul>
+
+                <div class="tab-content">
+                    <div class="tab-pane active" id="settings">
+                        <form class="form-horizontal">
+
+                            <dl class="dl-horizontal">
+                                <dt>党员代号</dt>
+                                <dd>
+                                    <a href="#"><small class="label pull-left bg-blue">
+                                         @Html.DisplayFor(model => model.PartyMemberID)
+                                    </small></a>
+                                </dd>
+
+                                <dt>姓名</dt>
+                                <dd>@Html.DisplayFor(model => model.Name)</dd>
+                                <dt>性别</dt>
+                                <dd>@Html.DisplayFor(model => model.Sex)</dd>
+                                <dt>身份证号</dt>
+                                <dd>@Html.DisplayFor(model => model.IDCard)</dd>
+                                <dt>出生日期</dt>
+                                <dd>@Html.DisplayFor(model => model.Birthday)</dd>
+                                <dt>民族</dt>
+                                <dd>@Html.DisplayFor(model => model.National)</dd>
+                                <dt>手机号码</dt>
+                                <dd>@Html.DisplayFor(model => model.Phone)</dd>
+                                <dt>住址</dt>
+                                <dd>@Html.DisplayFor(model => model.Adress)</dd>
+                                <dt>发展阶段</dt>
+                                <dd>@Html.DisplayFor(model => model.Stage)</dd>
+                                @{
+                                    if (Model.Stage == PartyMember.DevelopmentStage.NotInput)
+                                    {
+                                        <dt>申请入党日期</dt>
+                                        <dd>暂无</dd>
+                                        <dt>成为预备党员日期</dt>
+                                        <dd>暂无</dd>
+                                        <dt>成为正式党员日期</dt>
+                                        <dd>暂无</dd>
+                                    }
+                                    else if (Model.Stage == PartyMember.DevelopmentStage.Activist)
+                                    {
+                                        <dt>申请入党日期</dt>
+                                        <dd>@Html.DisplayFor(model => model.BeginDate)</dd>
+                                        <dt>成为预备党员日期</dt>
+                                        <dd>暂无</dd>
+                                        <dt>成为正式党员日期</dt>
+                                        <dd>暂无</dd>
+                                    }
+                                    else if (Model.Stage == PartyMember.DevelopmentStage.Prepare)
+                                    {
+                                        <dt>申请入党日期</dt>
+                                        <dd>@Html.DisplayFor(model => model.BeginDate)</dd>
+                                        <dt>成为预备党员日期</dt>
+                                        <dd>@Html.DisplayFor(model => model.PrepareDate)</dd>
+                                        <dt>成为正式党员日期</dt>
+                                        <dd>暂无</dd>
+                                    }
+                                    else
+                                    {
+                                        <dt>申请入党日期</dt>
+                                        <dd>@Html.DisplayFor(model => model.BeginDate)</dd>
+                                        <dt>成为预备党员日期</dt>
+                                        <dd>@Html.DisplayFor(model => model.PrepareDate)</dd>
+                                        <dt>成为正式党员日期</dt>
+                                        <dd>@Html.DisplayFor(model => model.FormalDate)</dd>
+                                    }
+                                }
+                                <dt>所属组织代码</dt>
+                                <dd>
+                                    <small class="label pull-left bg-aqua">
+                                        @Html.DisplayFor(model => model.OrgID)
+                                    </small>
+                                </dd>
+                            </dl>
+                            <a asp-action="Index" class="btn btn-default btn-sm">返回</a>
+
+                            <a class="btn btn-primary pull-right btn-sm" asp-action="Edit" asp-route-id="@Model.Guid">编辑</a>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
