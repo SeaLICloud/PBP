@@ -26,6 +26,8 @@ namespace PBP.Web.Migrations.PartyCost
 
                     b.Property<decimal>("Allowance");
 
+                    b.Property<decimal>("CostBase");
+
                     b.Property<DateTime>("CreateTime")
                         .ValueGeneratedOnAdd()
                         .HasDefaultValueSql("GETDATE()");
@@ -42,6 +44,8 @@ namespace PBP.Web.Migrations.PartyCost
                         .IsRequired();
 
                     b.Property<string>("PartyMemberID");
+
+                    b.Property<decimal>("Payable");
 
                     b.Property<decimal>("PerformanceWage");
 

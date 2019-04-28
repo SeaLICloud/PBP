@@ -20,6 +20,7 @@
         public const string OrgPre = "OG";
         public const string PMPre = "PM";
         public const string PCPre = "PC";
+        public const string CurrentPartyMember = "CurrentPartyMember";
     }
 
     public static class CKey
@@ -46,6 +47,6 @@
             "PartyMemberID,Name,Sex,IDCard,Birthday,National,Phone,Adress,Stage,BeginDate,PrepareDate,FormalDate,OrgID,State,Guid,CreateTime,UpdateTime";
 
         public const string PCPram =
-            "PartyCostID,PartyMemberID,PostWage,SalaryRankWage,Allowance,PerformanceWage,UnionCost,MedicalInsurance,UnemploymentInsurance,OldAgeInsurance,JobAnnuity,IndividualIncomeTax,Guid,CreateTime,UpdateTime";
+            "PartyCostID,PartyMemberID,PostWage,SalaryRankWage,Allowance,PerformanceWage,UnionCost,MedicalInsurance,UnemploymentInsurance,OldAgeInsurance,JobAnnuity,IndividualIncomeTax,State,CostBase,Payable,Guid,CreateTime,UpdateTime,";
     }
 }

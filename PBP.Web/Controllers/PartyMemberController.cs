@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -17,11 +18,19 @@ namespace PBP.Web.Controllers
         private readonly PartyMemberContext context;
         private readonly OrganizationContext orgContext;
         private readonly AccountContext accContext;
-        public PartyMemberController(PartyMemberContext context, OrganizationContext orgContext, AccountContext accContext)
+        private readonly PartyCostContext pCContext;
+        private readonly AccountPartyMemberContext aPMContext;
+        public PartyMemberController(PartyMemberContext context, 
+            OrganizationContext orgContext, 
+            AccountContext accContext, 
+            PartyCostContext pCContext,
+            AccountPartyMemberContext aPMContext)
         {
             this.context = context;
             this.orgContext = orgContext;
             this.accContext = accContext;
+            this.pCContext = pCContext;
+            this.aPMContext = aPMContext;
         }
 
         private bool PartyMemberExists(Guid id)
@@ -103,10 +112,10 @@ namespace PBP.Web.Controllers
             if (ModelState.IsValid)
             {
                 partyMember.Guid = Guid.NewGuid();
+                partyMember.CreateTime = DateTime.Now;
+                partyMember.UpdateTime = DateTime.Now;
                 partyMember.PartyMemberID = new SeriaNumber().Seria(context.PartyMembers.Count() + 1,Key.PMPre);
                 partyMember.Stage = PartyMember.DevelopmentStage.NotInput;
-                partyMember.CreateTime=DateTime.Now;
-                partyMember.UpdateTime=DateTime.Now;
                 context.Add(partyMember);
                 await context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -116,32 +125,58 @@ namespace PBP.Web.Controllers
 
         public async Task<IActionResult> Edit(Guid? id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var type = from t in orgContext.Organizations
-                select new SelectListItem { Value = t.OrgID, Text = t.Name };
+            var currentUser = HttpContext.User.Claims.First(x => x.Type == ClaimTypes.Name).Value;
+            var currentRole = HttpContext.User.Claims.First(x => x.Type == ClaimTypes.Role).Value;
+            var type = orgContext.Organizations.Select(t => new SelectListItem { Value = t.OrgID, Text = t.Name });
             ViewBag.TypeList = new SelectList(type, "Value", "Text");
 
-            var partyMember = await context.PartyMembers.FindAsync(id);
-            if (partyMember == null)
+            if (id == null && string.Equals(currentRole, UserRole.Ordinary.ToString(),StringComparison.CurrentCultureIgnoreCase))
             {
-                return NotFound();
+                var accountPartyMember = await aPMContext.AccountPartyMembers
+                    .FirstOrDefaultAsync(aPM => aPM.AccountID == currentUser);
+                if (accountPartyMember == null)
+                {
+                    return NotFound();
+                }
+                var rpartyMember = await context.PartyMembers
+                    .FirstOrDefaultAsync(pM => pM.PartyMemberID == accountPartyMember.PartyMemberID);
+                if (rpartyMember == null)
+                {
+                    return NotFound();
+                }
+
+                return View(rpartyMember);
             }
-            return View(partyMember);
+            else
+            {
+                if (id == null)
+                {
+                    return NotFound();
+                }
+                var partyMember = await context.PartyMembers.FindAsync(id);
+                if (partyMember == null)
+                {
+                    return NotFound();
+                }
+                return View(partyMember);
+            }
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(Guid id, [Bind(PKey.PMPram)] PartyMember partyMember)
+        public async Task<IActionResult> Edit(Guid? id, [Bind(PKey.PMPram)] PartyMember partyMember)
         {
-            if (id != partyMember.Guid)
+            var type = orgContext.Organizations.Select(t => new SelectListItem { Value = t.OrgID, Text = t.Name });
+            ViewBag.TypeList = new SelectList(type, "Value", "Text");
+            var currentRole = HttpContext.User.Claims.First(x => x.Type == ClaimTypes.Role).Value;
+            if (id != null && string.Equals(currentRole, UserRole.Admin.ToString(),
+                    StringComparison.CurrentCultureIgnoreCase))
             {
-                return NotFound();
-            }
-
+                if (id != partyMember.Guid)
+                {
+                    return NotFound();
+                }
+            } 
             if (ModelState.IsValid)
             {
                 try
@@ -161,7 +196,13 @@ namespace PBP.Web.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+
+                if (id != null && string.Equals(currentRole, UserRole.Admin.ToString(),
+                        StringComparison.CurrentCultureIgnoreCase))
+                {
+                    return RedirectToAction(nameof(Index));
+                }
+                return View(partyMember);
             }
             return View(partyMember);
         }
@@ -212,13 +253,32 @@ namespace PBP.Web.Controllers
             {
                 return NotFound();
             }
-            var account = await context.PartyMembers
+            var partyMember = await context.PartyMembers
                 .FirstOrDefaultAsync(o => o.Guid == id);
-            if (account == null)
+
+            if (partyMember == null)
             {
                 return NotFound();
             }
-            context.PartyMembers.Remove(account);
+            var partyCost = await pCContext.PartyCosts
+                .FirstOrDefaultAsync(pC => pC.PartyMemberID == partyMember.PartyMemberID);
+            var accountPartyMember = await aPMContext.AccountPartyMembers
+                .FirstOrDefaultAsync(aPM => aPM.PartyMemberID == partyMember.PartyMemberID);
+            if (accountPartyMember == null)
+            {
+                return NotFound();
+            }
+            var account = await accContext.Accounts
+                .FirstOrDefaultAsync(aC => aC.UserName == accountPartyMember.AccountID);
+
+            accContext.Accounts.Remove(account);
+            aPMContext.AccountPartyMembers.Remove(accountPartyMember);
+            pCContext.PartyCosts.Remove(partyCost);
+            context.PartyMembers.Remove(partyMember);
+
+            await accContext.SaveChangesAsync();
+            await aPMContext.SaveChangesAsync();
+            await pCContext.SaveChangesAsync();
             await context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }

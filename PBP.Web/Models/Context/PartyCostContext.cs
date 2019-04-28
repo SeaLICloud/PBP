@@ -53,6 +53,15 @@ namespace PBP.Web.Models.Context
                 .Property(pC => pC.IndividualIncomeTax);
 
             modelBuilder.Entity<PartyCost>()
+                .Property(pC => pC.State);
+
+            modelBuilder.Entity<PartyCost>()
+                .Property(pC => pC.CostBase);
+
+            modelBuilder.Entity<PartyCost>()
+                .Property(pC => pC.Payable);
+
+            modelBuilder.Entity<PartyCost>()
                 .Property(pC => pC.CreateTime)
                 .HasDefaultValueSql("GETDATE()")
                 .ValueGeneratedOnAdd();

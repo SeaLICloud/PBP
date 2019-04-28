@@ -70,7 +70,7 @@
                                 <!-- Menu Footer-->
                                 <li class="user-footer ">
                                     <div class="pull-left">
-                                        <a href="#" class="btn btn-default btn-flat">个人信息</a>
+                                        <a href="#" class="btn btn-default btn-flat">党员信息</a>
                                     </div>
                                     <div class="pull-right">
                                         <a asp-controller="Account" asp-action="LogOut" class="btn btn-default btn-flat">退出登录</a>
@@ -133,7 +133,7 @@
                             <ul class="treeview-menu">
                                 <li><a asp-controller="Account" asp-action="Index"><i class="fa fa-user"></i>账户管理</a></li>
                                 <li><a asp-controller="PartyMember" asp-action="Index"><i class="fa fa-user-md"></i>党员管理</a></li>
-                                <li><a a asp-controller="Organization" asp-action="Index"><i class="fa fa-users"></i>组织管理</a></li>
+                                <li><a asp-controller="Organization" asp-action="Index"><i class="fa fa-users"></i>组织管理</a></li>
                             </ul>
                         </li>
 
@@ -146,7 +146,7 @@
                                 </span>
                             </a>
                             <ul class="treeview-menu">
-                                <li><a asp-controller="PartyCost" asp-action="Index"><i class="fa fa-money"></i>党员党费</a></li>
+                                <li><a asp-controller="PartyCost" asp-action="Index"><i class="fa fa-gg"></i>党费信息</a></li>
                                 <li><a href="#"><i class="fa fa-history"></i>缴纳记录</a></li>
                             </ul>
                         </li>
@@ -188,9 +188,36 @@
                 {
                     <ul class="sidebar-menu" data-widget="tree">
                         <li class="header">主要导航</li>
-                        <li><a asp-controller="PartyMember" asp-action="Index"><i class="fa fa-user-md"></i>个人信息</a></li>
-                        <li><a asp-controller="PartyMember" asp-action="Index"><i class="fa fa-user-md"></i>党费记录</a></li>
-                        <li><a asp-controller="PartyMember" asp-action="Index"><i class="fa fa-user-md"></i>意见反馈</a></li>
+                        <li class="treeview">
+                            <a href="#">
+                                <i class="fa  fa-hand-spock-o"></i>
+                                <span>基础数据</span>
+                                <span class="pull-right-container">
+                                    <i class="fa fa-angle-left pull-right"></i>
+                                </span>
+                            </a>
+                            <ul class="treeview-menu">
+                                <li><a asp-controller="PartyMember" asp-action="Edit"><i class="fa fa-user-md"></i>个人信息</a></li>
+                                
+                            </ul>
+                        </li>
+
+                        <li class="treeview">
+                            <a href="#">
+                                <i class="fa fa-paypal"></i>
+                                <span>党员党费</span>
+                                <span class="pull-right-container">
+                                    <i class="fa fa-angle-left pull-right"></i>
+                                </span>
+                            </a>
+                            <ul class="treeview-menu">
+                                <li><a asp-controller="PartyCost" asp-action="FillInfo"><i class="fa fa-paypal"></i>党费信息</a></li>
+                                <li><a asp-controller="PartyMember" asp-action="Index"><i class="fa fa-send-o (alias)"></i>党费缴纳</a></li>
+                                <li><a asp-controller="PartyMember" asp-action="Index"><i class="fa fa-history"></i>党费记录</a></li>
+                            </ul>
+                        </li>
+
+                        <li><a href="https://adminlte.io/docs"><i class="fa fa-commenting"></i> <span>意见反馈</span></a></li>
                         <li class="header">其他导航</li>
                         <li><a href="#"><i class="fa fa-sort-numeric-desc"></i> <span>更新记录</span></a></li>
                     </ul>

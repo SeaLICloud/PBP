@@ -1,0 +1,117 @@
+﻿@using PBP.Web.Common
+@using PBP.Web.Models.Domain
+@model PBP.Web.Models.Domain.PartyCost
+
+@{
+    ViewData["Title"] = "Create";
+}
+<section class="content">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="nav-tabs-custom">
+                <ul class="nav nav-tabs">
+                    <li class="active"><a href="#settings" data-toggle="tab" aria-expanded="true">党费信息</a></li>
+                </ul>
+
+                <div class="tab-content">
+                    <div class="tab-pane active" id="settings">
+                        <form asp-action="FillInfo" class="form-horizontal">
+                            <input type="hidden" asp-for="Guid"/>
+                            <input type="hidden" asp-for="CreateTime"/>
+                            <input type="hidden" asp-for="UpdateTime"/>
+                            <input type="hidden" asp-for="PartyMemberID"/>
+                            <input type="hidden" asp-for="PartyCostID"/>
+                            <div class="form-group">
+                                <label asp-for="PostWage" style="font-size: 13px" class="col-sm-2 control-label">岗位工资</label>
+                                <div class="col-sm-8">
+                                    <input asp-for="PostWage" class="form-control input-sm" placeholder="请输入岗位工资"/>
+                                </div>
+                                <span asp-validation-for="PostWage" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="SalaryRankWage" style="font-size: 13px" class="col-sm-2 control-label">薪级工资</label>
+                                <div class="col-sm-8">
+                                    <input asp-for="SalaryRankWage" class="form-control input-sm" placeholder="请输入薪级工资"/>
+                                </div>
+                                <span asp-validation-for="SalaryRankWage" class="text-danger"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label asp-for="PerformanceWage" style="font-size: 13px" class="col-sm-2 control-label">绩效工资</label>
+                                <div class="col-sm-8">
+                                    <input asp-for="PerformanceWage" class="form-control input-sm" placeholder="请输入绩效工资"/>
+                                </div>
+                                <span asp-validation-for="PerformanceWage" class="text-danger"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label asp-for="Allowance" style="font-size: 13px" class="col-sm-2 control-label">津贴补贴</label>
+                                <div class="col-sm-8">
+                                    <input asp-for="Allowance" class="form-control input-sm" placeholder="请输入津贴补贴"/>
+                                </div>
+                                <span asp-validation-for="Allowance" class="text-danger"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label asp-for="UnionCost" style="font-size: 13px" class="col-sm-2 control-label">工会会费</label>
+                                <div class="col-sm-8">
+                                    <input asp-for="UnionCost" class="form-control input-sm" placeholder="请输入工会会费"/>
+                                </div>
+                                <span asp-validation-for="UnionCost" class="text-danger"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label asp-for="MedicalInsurance" style="font-size: 13px" class="col-sm-2 control-label">医疗保险</label>
+                                <div class="col-sm-8">
+                                    <input asp-for="MedicalInsurance" class="form-control input-sm" placeholder="请输入医疗保险"/>
+                                </div>
+                                <span asp-validation-for="MedicalInsurance" class="text-danger"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label asp-for="UnemploymentInsurance" style="font-size: 13px" class="col-sm-2 control-label">失业保险</label>
+                                <div class="col-sm-8">
+                                    <input asp-for="UnemploymentInsurance" class="form-control input-sm" placeholder="请输入失业保险"/>
+                                </div>
+                                <span asp-validation-for="UnemploymentInsurance" class="text-danger"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label asp-for="OldAgeInsurance" style="font-size: 13px" class="col-sm-2 control-label">养老保险</label>
+                                <div class="col-sm-8">
+                                    <input asp-for="OldAgeInsurance" class="form-control input-sm" placeholder="请输入养老保险"/>
+                                </div>
+                                <span asp-validation-for="OldAgeInsurance" class="text-danger"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label asp-for="JobAnnuity" style="font-size: 13px" class="col-sm-2 control-label">职业年金</label>
+                                <div class="col-sm-8">
+                                    <input asp-for="JobAnnuity" class="form-control input-sm" placeholder="请输入职业年金"/>
+                                </div>
+                                <span asp-validation-for="JobAnnuity" class="text-danger"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label asp-for="IndividualIncomeTax" style="font-size: 13px" class="col-sm-2 control-label">个人所得税</label>
+                                <div class="col-sm-8">
+                                    <input asp-for="IndividualIncomeTax" class="form-control input-sm" placeholder="请输入个人所得税"/>
+                                </div>
+                                <span asp-validation-for="IndividualIncomeTax" class="text-danger"></span>
+                            </div>
+
+
+                            <a asp-action="Index" class="btn btn-default btn-sm">返回</a>
+                            <input type="submit" value="确认" class="btn btn-danger pull-right btn-sm"/>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

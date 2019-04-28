@@ -26,7 +26,9 @@ namespace PBP.Web.Migrations.PartyCost
                     OldAgeInsurance = table.Column<decimal>(nullable: false),
                     JobAnnuity = table.Column<decimal>(nullable: false),
                     IndividualIncomeTax = table.Column<decimal>(nullable: false),
-                    State = table.Column<int>(nullable: false)
+                    State = table.Column<int>(nullable: false),
+                    CostBase = table.Column<decimal>(nullable: false),
+                    Payable = table.Column<decimal>(nullable: false)
                 },
                 constraints: table =>
                 {

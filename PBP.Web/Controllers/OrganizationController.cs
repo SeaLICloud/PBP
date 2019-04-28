@@ -73,7 +73,6 @@ namespace PBP.Web.Controllers
                 organization.CreateTime = DateTime.Now;
                 organization.UpdateTime = DateTime.Now;
                 organization.OrgID = new SeriaNumber().Seria(context.Organizations.Count() + 1,Key.OrgPre);
-
                 context.Add(organization);
                 await context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));

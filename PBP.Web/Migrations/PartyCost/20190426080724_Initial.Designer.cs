@@ -10,7 +10,7 @@ using PBP.Web.Models.Context;
 namespace PBP.Web.Migrations.PartyCost
 {
     [DbContext(typeof(PartyCostContext))]
-    [Migration("20190426074306_Initial")]
+    [Migration("20190426080724_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -28,6 +28,8 @@ namespace PBP.Web.Migrations.PartyCost
 
                     b.Property<decimal>("Allowance");
 
+                    b.Property<decimal>("CostBase");
+
                     b.Property<DateTime>("CreateTime")
                         .ValueGeneratedOnAdd()
                         .HasDefaultValueSql("GETDATE()");
@@ -44,6 +46,8 @@ namespace PBP.Web.Migrations.PartyCost
                         .IsRequired();
 
                     b.Property<string>("PartyMemberID");
+
+                    b.Property<decimal>("Payable");
 
                     b.Property<decimal>("PerformanceWage");
 

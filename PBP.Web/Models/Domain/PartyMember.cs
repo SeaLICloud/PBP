@@ -6,6 +6,14 @@ namespace PBP.Web.Models.Domain
 {
     public class PartyMember:Entity<PartyMember>
     {
+        public PartyMember()
+        {
+
+        }
+        public PartyMember(string partyMemberID)
+        {
+            PartyMemberID = partyMemberID;
+        }
         /// <summary>
         /// 党员代码
         /// </summary>

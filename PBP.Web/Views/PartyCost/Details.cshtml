@@ -4,99 +4,74 @@
     ViewData["Title"] = "Details";
 }
 
-<h2>Details</h2>
+<section class="content">
 
-<div>
-    <h4>PartyCost</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.PartyCostID)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.PartyCostID)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.PartyMemberID)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.PartyMemberID)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.PostWage)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.PostWage)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.SalaryRankWage)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.SalaryRankWage)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Allowance)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Allowance)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.PerformanceWage)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.PerformanceWage)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.UnionCost)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.UnionCost)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.MedicalInsurance)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.MedicalInsurance)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.UnemploymentInsurance)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.UnemploymentInsurance)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.OldAgeInsurance)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.OldAgeInsurance)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.JobAnnuity)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.JobAnnuity)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.IndividualIncomeTax)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.IndividualIncomeTax)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.CreateTime)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.CreateTime)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.UpdateTime)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.UpdateTime)
-        </dd>
-    </dl>
-</div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model.Guid">Edit</a> |
-    <a asp-action="Index">Back to List</a>
-</div>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="nav-tabs-custom">
+                <ul class="nav nav-tabs">
+                    <li class="active"><a href="#settings" data-toggle="tab" aria-expanded="true">党费详情</a></li>
+                </ul>
+
+                <div class="tab-content">
+                    <div class="tab-pane active" id="settings">
+                        <form class="form-horizontal">
+
+                            <dl class="dl-horizontal">
+                                <dt>党员代码</dt>
+                                <dd>
+                                    <span class="label label-default">
+                                        @Html.DisplayFor(model => model.PartyMemberID)
+                                    </span>
+                                </dd>
+
+                                <dt>党费代码</dt>
+                                <dd>
+                                    <span class="label label-default">
+                                        @Html.DisplayFor(model => model.PartyCostID)
+                                    </span>
+                                </dd>
+                                <dt>岗位工资</dt>
+                                <dd>@Html.DisplayFor(model => model.PostWage)</dd>
+                                <dt>薪级工资</dt>
+                                <dd>@Html.DisplayFor(model => model.SalaryRankWage)</dd>
+                                <dt>津贴补贴</dt>
+                                <dd>@Html.DisplayFor(model => model.Allowance)</dd>
+                                <dt>绩效工资</dt>
+                                <dd>@Html.DisplayFor(model => model.PerformanceWage)</dd>
+
+                                <dt>工会会费</dt>
+                                <dd>@Html.DisplayFor(model => model.UnionCost)</dd>
+                                <dt>医疗保险</dt>
+                                <dd>@Html.DisplayFor(model => model.MedicalInsurance)</dd>
+                                <dt>失业保险</dt>
+                                <dd>@Html.DisplayFor(model => model.UnemploymentInsurance)</dd>
+                                <dt>养老保险</dt>
+                                <dd>@Html.DisplayFor(model => model.OldAgeInsurance)</dd>
+                                <dt>职业年金</dt>
+                                <dd>@Html.DisplayFor(model => model.JobAnnuity)</dd>
+                                <dt>个人所得税</dt>
+                                <dd>@Html.DisplayFor(model => model.IndividualIncomeTax)</dd>
+
+                                <dt>审核状态</dt>
+                                <dd>
+                                    <span class="label label-default">
+                                        @Html.DisplayFor(model => model.State)
+                                    </span>
+                                </dd>
+                                <dt>党费计算基数</dt>
+                                <dd>@Html.DisplayFor(model => model.CostBase)</dd>
+                                <dt>缴纳党费标准</dt>
+                                <dd>@Html.DisplayFor(model => model.Payable)</dd>
+
+                            </dl>
+                            <a asp-action="Index" class="btn btn-default btn-sm">返回</a>
+
+                            <a class="btn btn-primary pull-right btn-sm" asp-action="Edit" asp-route-id="@Model.Guid">编辑</a>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
