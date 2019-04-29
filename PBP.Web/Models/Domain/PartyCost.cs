@@ -17,12 +17,12 @@ namespace PBP.Web.Models.Domain
         }
 
         /// <summary>
-        ///     党费ID
+        ///     党费代码
         /// </summary>
         public string PartyCostID { get; set; }
 
         /// <summary>
-        ///     党员ID
+        ///     党员代码
         /// </summary>
         public string PartyMemberID { get; set; }
 

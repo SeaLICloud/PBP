@@ -38,6 +38,7 @@ namespace PBP.Web
             services.AddDbContext<PartyMemberContext>(options => options.UseSqlServer(connection));
             services.AddDbContext<AccountPartyMemberContext>(options => options.UseSqlServer(connection));
             services.AddDbContext<PartyCostContext>(options => options.UseSqlServer(connection));
+            services.AddDbContext<PartyCostRecordContext>(options => options.UseSqlServer(connection));
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)

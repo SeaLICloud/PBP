@@ -1,0 +1,88 @@
+﻿@using PBP.Web.Common
+@using PBP.Web.Models.Domain
+@model PBP.Web.Models.Domain.PartyCostRecord
+
+@{
+    ViewData["Title"] = "Pay";
+}
+
+
+<div class="col-md-9">
+    <div class="nav-tabs-custom">
+        <ul class="nav nav-tabs">
+            <li class="active"><a href="#timeline" data-toggle="tab" aria-expanded="true">交费区</a></li>
+            <li class=""><a href="#settings" data-toggle="tab" aria-expanded="false">提交记录</a></li>
+        </ul>
+        <div class="tab-content">
+            <div class="tab-pane active" id="timeline">
+                <ul class="timeline timeline-inverse">
+                    <li>
+                        <i class="fa bg-blue">支</i>
+                        <div class="timeline-item bg-gray-light col-md-6">
+                            <span class="time"><i class="fa fa-android"></i></span>
+                            <h3 class="timeline-header"><a href="#">支付宝 </a> - 您可以使用支付宝扫描下方二维码进行支付！</h3>
+                            <div class="timeline-body">
+                                <img src="~/images/AliPay.jpg" width="30%" height="30%"/>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <i class="fa fa-wechat bg-green"></i>
+                        <div class="timeline-item bg-gray-light col-md-6">
+                            <span class="time"><i class="fa fa-android"></i> </span>
+                            <h3 class="timeline-header"><a href="#">微信</a> - 您可以使用微信扫描下方二维码进行支付！</h3>
+                            <div class="timeline-body">
+                                <img src="~/images/WechaPay.png" width="30%" height="30%"/>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <i class="fa fa-clock-o bg-gray"></i>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="tab-pane" id="settings">
+                <form asp-action="Pay" class="form-horizontal">
+                    <input type="hidden" asp-for="Guid" />
+                    <input type="hidden" asp-for="PartyMemberID" />
+                    <input type="hidden" asp-for="PartyMemberID" />
+                    <div class="form-group">
+                        <label asp-for="PayAmount" style="font-size:13px" class="col-sm-2 control-label">缴费金额</label>
+                        <div class="col-sm-8">
+                            <input asp-for="PayAmount" class="form-control input-sm" placeholder="您的缴费标准为：[@ViewData[Key.Amount]元/月],请输入对应区间缴费金额！" />
+                        </div>
+                        <span asp-validation-for="PayAmount" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="PayFunc" style="font-size:13px" class="col-sm-2 control-label">支付方式</label>
+                        <div class="col-sm-8">
+                            <select asp-for="PayFunc" asp-items="@Html.GetEnumSelectList(typeof(PartyCostRecord.PayMethod))" class="form-control input-sm">
+                                <option>---请选择---</option>
+                            </select>
+                        </div>
+                        <span asp-validation-for="PayFunc" class="text-danger"></span>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label asp-for="BeginTime" style="font-size:13px" class="col-sm-2 control-label">支付起始时间</label>
+                        <div class="col-sm-8">
+                            <input asp-for="BeginTime" class="form-control input-sm" placeholder="请输入支付起始时间" />
+                        </div>
+                        <span asp-validation-for="BeginTime" class="text-danger"></span>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label asp-for="EndTime" style="font-size:13px" class="col-sm-2 control-label">支付结束时间</label>
+                        <div class="col-sm-8">
+                            <input asp-for="EndTime" class="form-control input-sm" placeholder="请输入支付结束时间" />
+                        </div>
+                        <span asp-validation-for="EndTime" class="text-danger"></span>
+                    </div>
+                    <input type="submit" value="确认支付" class="btn btn-danger btn-sm" />
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,180 @@
+﻿@using PBP.Web.Models.Domain
+@model PBP.Web.Common.PaginatedList<PBP.Web.Models.Domain.PartyCostRecord>
+
+@{
+    ViewData["Title"] = "Index";
+    var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
+    var nextDisabled = !Model.HasNextPage ? "disabled" : "";
+    var currentPage = ViewData["CurrentPage"] == null ? "1" : ViewData["CurrentPage"].ToString();
+}
+
+<section class="content-header">
+    <div style="font-size: 20px">交费记录</div>
+    <ol class="breadcrumb">
+        <li>
+            <a href="#"><i class="fa fa-th-large"></i>系统主页</a>
+        </li>
+        <li>
+            <a href="#">党费管理</a>
+        </li>
+        <li class="active">缴纳记录</li>
+    </ol>
+</section>
+
+<section class="content">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="box">
+
+                <div class="box-header">
+                    <div class="row">
+                        <div class="col-xs-3">
+                            <form asp-action="Index" method="get">
+                                <div class="input-group input-group-sm right">
+                                    <input type="text" name="SearchString" class="form-control" value="@ViewData["currentFilter"]" placeholder="请输入党员代码...">
+                                    <span class="input-group-btn">
+                                        <button type="submit" value="Search" class="btn btn-info btn-flat fa fa-search">查询</button>
+                                    </span>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="box-body">
+                    <div id="example2_wrapper" class="dataTables_wrapper form-inline">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <table id="example2" class="table table-bordered table-hover dataTable" role="grid" aria-describedby="example2_info">
+                                    <thead>
+                                        <tr role="row">
+                                            <th tabindex="0" aria-controls="example2" rowspan="1" colspan="1">党员代码</th>
+                                            <th tabindex="0" aria-controls="example2" rowspan="1" colspan="1">党员姓名</th>
+                                            <th tabindex="0" aria-controls="example2" rowspan="1" colspan="1">支付时间</th>
+                                            <th tabindex="0" aria-controls="example2" rowspan="1" colspan="1">支付方式</th>
+                                            <th tabindex="0" aria-controls="example2" rowspan="1" colspan="1">支付金额</th>
+                                            <th tabindex="0" aria-controls="example2" rowspan="1" colspan="1">缴纳时段</th>
+                                            <th tabindex="0" aria-controls="example2" rowspan="1" colspan="1">审核状态</th>
+                                            <th tabindex="0" aria-controls="example2" rowspan="1" colspan="1">操作</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var item in Model)
+                                        {
+                                            var id = "'" + item.Guid + "'";
+                                            <tr>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.PartyMemberID)
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.PartyMemberName)
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.PayTime)
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.PayFunc)
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.PayAmount)
+                                                </td>
+                                                <td>
+                                                    [@Html.DisplayFor(modelItem => item.BeginTime)]-[@Html.DisplayFor(modelItem => item.EndTime)]
+                                                </td>
+                                                <td>
+                                                    @if (item.State == Verify.Unaudited)
+                                                    {
+                                                        <span class="label label-default">
+                                                            @Html.DisplayFor(modelItem => item.State)
+                                                        </span>
+                                                    }
+                                                    else
+                                                    {
+                                                        <span class="label label-success">
+                                                            @Html.DisplayFor(modelItem => item.State)
+                                                        </span>
+                                                    }
+                                                </td>
+                                                <td>
+                                                    @if (item.State == Verify.Unaudited)
+                                                    {
+                                                        <button id="vertifyEntity" type="button"
+                                                                class="btn btn-github btn-xs" data-toggle="modal"
+                                                                data-target="#modal-default-vertify"
+                                                                onclick="getvertifyId(@id)">
+                                                            审核
+                                                        </button>
+                                                    }
+
+                                                </td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+
+                            </div>
+                        </div>
+
+
+                        <div class="row">
+
+                            <div class="col-sm-5">
+                                <div class="dataTables_info" id="example2_info" role="status" aria-live="polite">共 @ViewData["Total"] 条 &nbsp; 第 @currentPage 页</div>
+                            </div>
+                            <div class="col-sm-7">
+                                <div class="dataTables_paginate" id="example2_paginate">
+                                    <ul class="pagination">
+                                        <li class="previous" id="example2_previous">
+                                            <a asp-action="Index"
+                                               asp-route-sortOrder="@ViewData["CurrentSort"]"
+                                               asp-route-pageNumber="@(Model.PageIndex - 1)"
+                                               asp-route-currentFilter="@ViewData["CurrentFilter"]"
+                                               class="btn btn-default btn-sm right @prevDisabled">
+                                                上一页
+                                            </a>
+                                        </li>
+                                        <li class="next" id="example2_next">
+                                            <a asp-action="Index"
+                                               asp-route-sortOrder="@ViewData["CurrentSort"]"
+                                               asp-route-pageNumber="@(Model.PageIndex + 1)"
+                                               asp-route-currentFilter="@ViewData["CurrentFilter"]"
+                                               class="btn btn-default btn-sm right @nextDisabled">
+                                                下一页
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="modal fade" id="modal-default-vertify" style="display: none;">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+                <h4 class="modal-title">审核提示</h4>
+            </div>
+            <div class="modal-body">
+                <p>您确定要将该党员党费缴纳信息审核通过,通过后将不能操作?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default pull-left btn-sm" data-dismiss="modal">关闭</button>
+                <a id="confirmvertify" class="btn btn-danger btn-sm" href="">确认</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function getvertifyId(id) {
+        $("#confirmvertify").attr("href", "/PartyCostRecord/Vertify/" + id);
+    }
+</script>

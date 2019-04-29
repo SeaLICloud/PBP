@@ -21,6 +21,7 @@
         public const string PMPre = "PM";
         public const string PCPre = "PC";
         public const string CurrentPartyMember = "CurrentPartyMember";
+        public const string Amount = "Amount";
     }
 
     public static class CKey
@@ -30,7 +31,6 @@
         public const string EMNOTNULL = "注：账户邮箱不能为空！";
         public const string UDNOTNULL = "注：账户密码输入不正确!";
         public const string ACCOUNTEXIST = "注：该账户名已存在!";
-
         public const string ONAMENOTNULL = "注：组织名称不能为空！";
         public const string OSNAMENOTNULL = "注：组织简称不能为空！";
         public const string OTYPENOTNULL = "注：组织类型不能为空！";
@@ -40,13 +40,13 @@
         public const string LOGINFAILED = "LOGINFAILED";
         public const string ACCOUNTEXIST = "ACCOUNTEXIST";
     }
-
     public static class PKey
     {
         public const string PMPram = 
             "PartyMemberID,Name,Sex,IDCard,Birthday,National,Phone,Adress,Stage,BeginDate,PrepareDate,FormalDate,OrgID,State,Guid,CreateTime,UpdateTime";
-
         public const string PCPram =
             "PartyCostID,PartyMemberID,PostWage,SalaryRankWage,Allowance,PerformanceWage,UnionCost,MedicalInsurance,UnemploymentInsurance,OldAgeInsurance,JobAnnuity,IndividualIncomeTax,State,CostBase,Payable,Guid,CreateTime,UpdateTime,";
+        public const string PCRPram =
+            "PartyMemberID,PartyMemberName,PartyCostID,PayTime,PayFunc,PayAmount,BeginTime,EndTime,State,Guid,CreateTime,UpdateTime";
     }
 }

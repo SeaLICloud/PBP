@@ -1,0 +1,17 @@
+﻿using System;
+using Alipay.AopSdk.Core;
+using Alipay.AopSdk.Core.Domain;
+using Alipay.AopSdk.Core.Request;
+
+namespace PBP.Web.Common
+{
+    public static class PayConfig
+    {
+        public const string AppId = "2019042864334190";
+        public const string Gatewayurl = "https://openapi.alipay.com/gateway.do";
+        public const string PrivateKey = "MIIEpQIBAAKCAQEAwlb0NQSSWon/S46SG48V6Cookvy8/SHBC6juIb0bpMgndFx5OV91m+CCBBn6l310NEwAIaplaM9hFw8hJG0dyuBevpYf8BihM0O/Kw2c5yBqV6925Lxn/OsHELjnsamhvwfC6wWleBii61WbyoTWCQe55BtTQrvJJ+3xq5GPHUTVCJAyxHKgNT7dvNwDvjpwCnBXhnJj2uMbgIKdO+OyqqAJA5kn51kjx7TgBvpsp2dnMeyiCUgYJaTbwmUI3A7nOaS9wqrc+N4vSfJi25/b2e8DrpORxietZWaAQFm2iJiFeEccVXDw4CjNCYHYE9PqlS5JIngx08U59puSNblzdwIDAQABAoIBAQCzY26SzgCGoKFOznDiDYdMQjYn0DJnetPmfm4qKJSu269HwuCHbC100J1TSeO+GKi+aXUpnk9zmxHlJisSo8J/dfMe/BbJGwMZ/iwlgrBVzN88x5P4+k0G8rAX6Ia+wXWzj2eGaDTgkeU5VFG1dD7aIQ6fl/WYQR0ixYpyM6+mdDl794ExtuTKDqBu0BVQpGUR7+0+pjhfnj6F0ptJn+6b4jJbNvEAFTHmGaXYt/amt47eN7qR1WQbdcfs3KapXrbLSAzlPLS70NbKGlkHKdhQL0c8NbklFfd9F1j++ilSaHvDQh/KO0cap5Ppvhl9z8+2rSpQOCldZMv4NQ0ZwGwJAoGBAO5dcEwUkFvjoJds9f2YN66hFh9omHpIC5f8Nmtmdl/D4HUtCtxArk3DAWhrxApihMvd3grswVB3cJ86D9mIOTSBhHRlGt+jlQ1/SBhpXinuZ6SllXLZFJQUpagzBNsO4u9ZjgCOolw4HmtYDwwKrDSNavzTJdrxfoz4FDL3EHnDAoGBANC3sFFJytrLxkm+AJt76ZG/dLjPb1GR1QMd2bzoymZ5WHptzT3wp41f88kvPFyc0fX19h5y86ejZYjmenf5UwvV9e0MbKrQ4mQR1H1DZzYzSL5kND5SgDZWKYQa+mxoCLsv4iGEf9Jz+FxDMKQYykjNbKcn0PJgmyCZ/rKgytA9AoGAOfFWyfe5u8ySjhy7k2C8MGQSF6J6Zkc7Ij/6DpOCtPbNik5ftHi4pkiAAB0qM4gNVe1h+2/f8iqGov4fOjbmCQBu7Uhihvih0/0bzmtWq4S7hweFU7y3RuPZ/RAh3wo4Wgx/+1yw1RADPP7T8Y5qm//AgSLmsdlAdQ4dAuKSC7cCgYEAxF0tWy0L1tGEmnhR5fasht0TmZQ/bQTA3Y/F/L8fPU3I+lY3lKDHYnD10T/JkHBR8RAZIAiSSBOoQSZl7l35zdbc6sqXqhWgCPnlanxxrEKPm+B2bnP8ACMMKCehl0BBhqrEGzincX5+GX91Uc2o8tmh8Zm6MW7GQ+PeBnzUkxkCgYEAhjfqEy7l1pv1YlyR9EuYWZhHcXVHpS5+YmTcmkYbh8qapcy6nVQeHDpkPeM6CoRRUz0mQ38CfnlolUl3GS72cYv1dOe5XUq74llYv6vOw4/DWE1+DLDfWdY990DJBm/OeHylcrob/vpLExKRA9J6QD7Crb/JvStOd+EXC88ebdE=";
+        public const string AlipayPublicKey = "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA1cO70SeShC7zaLlIVEppBqcWlXjd/yDOoecnU9zxi/g8ULzYjz6Vx8/6H8Q8lTnxVa79dj2ZGP0w2cKMQm8jhr48/lMpJFCs7fytd15oAoCy05Vhy2mLmh8huzM5ZuHJAyLSk5Z8iOnGA66hUXwky6VWFayoQaiYKK8dAMRnLoycyhJGcI2sFmiBxAlZ0a+lmTuLypjjc/62hvuVYQ6Rld+f3RQ3Wj+7/jlHRc31f7Q4YTRLA8P4DF5H8qw9sO/z8QmwQXd1a5F7Biyj9WWQq0A/LNpXid4yM63yH8ZrYbAg9BVASZFweLDGdQYm7NKc6C17SU3TqIYpxBaRcssLAwIDAQAB";
+        public const string SignType = "RSA2";
+        public const string CharSet = "UTF-8";
+    }
+}

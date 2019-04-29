@@ -147,7 +147,7 @@
                             </a>
                             <ul class="treeview-menu">
                                 <li><a asp-controller="PartyCost" asp-action="Index"><i class="fa fa-gg"></i>党费信息</a></li>
-                                <li><a href="#"><i class="fa fa-history"></i>缴纳记录</a></li>
+                                <li><a asp-controller="PartyCostRecord" asp-action="Index"><i class="fa fa-history"></i>缴纳记录</a></li>
                             </ul>
                         </li>
 
@@ -212,7 +212,7 @@
                             </a>
                             <ul class="treeview-menu">
                                 <li><a asp-controller="PartyCost" asp-action="FillInfo"><i class="fa fa-paypal"></i>党费信息</a></li>
-                                <li><a asp-controller="PartyMember" asp-action="Index"><i class="fa fa-send-o (alias)"></i>党费缴纳</a></li>
+                                <li><a asp-controller="PartyCostRecord" asp-action="Pay"><i class="fa fa-send-o (alias)"></i>党费缴纳</a></li>
                                 <li><a asp-controller="PartyMember" asp-action="Index"><i class="fa fa-history"></i>党费记录</a></li>
                             </ul>
                         </li>
