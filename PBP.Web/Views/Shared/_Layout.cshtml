@@ -1,6 +1,5 @@
 ﻿@using System.Security.Claims
 @using PBP.Web.Common
-@using PBP.Web.Models.Domain
 @{
     var currentUser = Context.User.Claims.First(x => x.Type == ClaimTypes.Name).Value;
     var currentRole = Context.User.Claims.First(x => x.Type == ClaimTypes.Role).Value;
@@ -120,68 +119,68 @@
                 <!-- sidebar menu: : style can be found in sidebar.less -->
                 @if (currentRole == Key.Admin)
                 {
-                    <ul class="sidebar-menu" data-widget="tree">
-                        <li class="header">主要导航</li>
-                        <li class="treeview">
-                            <a href="#">
-                                <i class="fa fa-th"></i>
-                                <span>基础数据</span>
-                                <span class="pull-right-container">
-                                    <i class="fa fa-angle-left pull-right"></i>
-                                </span>
-                            </a>
-                            <ul class="treeview-menu">
-                                <li><a asp-controller="Account" asp-action="Index"><i class="fa fa-user"></i>账户管理</a></li>
-                                <li><a asp-controller="PartyMember" asp-action="Index"><i class="fa fa-user-md"></i>党员管理</a></li>
-                                <li><a asp-controller="Organization" asp-action="Index"><i class="fa fa-users"></i>组织管理</a></li>
-                            </ul>
-                        </li>
+                <ul class="sidebar-menu" data-widget="tree">
+                    <li class="header">主要导航</li>
+                    <li class="treeview">
+                        <a href="#">
+                            <i class="fa fa-th"></i>
+                            <span>基础数据</span>
+                            <span class="pull-right-container">
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </span>
+                        </a>
+                        <ul class="treeview-menu">
+                            <li><a asp-controller="Account" asp-action="Index"><i class="fa fa-user"></i>账户管理</a></li>
+                            <li><a asp-controller="PartyMember" asp-action="Index"><i class="fa fa-user-md"></i>党员管理</a></li>
+                            <li><a asp-controller="Organization" asp-action="Index"><i class="fa fa-users"></i>组织管理</a></li>
+                        </ul>
+                    </li>
 
-                        <li class="treeview">
-                            <a href="#">
-                                <i class="fa fa-paypal"></i>
-                                <span>党费管理</span>
-                                <span class="pull-right-container">
-                                    <i class="fa fa-angle-left pull-right"></i>
-                                </span>
-                            </a>
-                            <ul class="treeview-menu">
-                                <li><a asp-controller="PartyCost" asp-action="Index"><i class="fa fa-gg"></i>党费信息</a></li>
-                                <li><a asp-controller="PartyCostRecord" asp-action="Index"><i class="fa fa-history"></i>缴纳记录</a></li>
-                            </ul>
-                        </li>
+                    <li class="treeview">
+                        <a href="#">
+                            <i class="fa fa-paypal"></i>
+                            <span>党费管理</span>
+                            <span class="pull-right-container">
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </span>
+                        </a>
+                        <ul class="treeview-menu">
+                            <li><a asp-controller="PartyCost" asp-action="Index"><i class="fa fa-gg"></i>党费信息</a></li>
+                            <li><a asp-controller="PartyCostRecord" asp-action="Index"><i class="fa fa-history"></i>缴纳记录</a></li>
+                        </ul>
+                    </li>
 
-                        <li class="treeview">
-                            <a href="#">
-                                <i class="fa  fa-hand-spock-o"></i>
-                                <span>活动管理</span>
-                                <span class="pull-right-container">
-                                    <i class="fa fa-angle-left pull-right"></i>
-                                </span>
-                            </a>
-                            <ul class="treeview-menu">
-                                <li><a asp-controller="LostFound" asp-action="Index"><i class="fa fa-location-arrow"></i>失物招领</a></li>
-                                <li><a asp-controller="ThreeSession" asp-action="Index"><i class="fa fa-spinner"></i>三会一课</a></li>
-                            </ul>
-                        </li>
-                        <li class="treeview">
-                            <a href="#">
-                                <i class="fa fa-folder"></i>
-                                <span>资料管理</span>
-                                <span class="pull-right-container">
-                                    <i class="fa fa-angle-left pull-right"></i>
-                                </span>
-                            </a>
-                            <ul class="treeview-menu">
-                                <li><a asp-controller="File" asp-action="UpLoad"><i class="fa fa-folder-open"></i>上传文件</a></li>
-                                <li><a asp-controller="File" asp-action="Index"><i class="fa fa-folder-open-o"></i>文件记录</a></li>
-                            </ul>
-                        </li>
+                    <li class="treeview">
+                        <a href="#">
+                            <i class="fa  fa-hand-spock-o"></i>
+                            <span>活动管理</span>
+                            <span class="pull-right-container">
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </span>
+                        </a>
+                        <ul class="treeview-menu">
+                            <li><a asp-controller="LostFound" asp-action="Index"><i class="fa fa-location-arrow"></i>失物招领</a></li>
+                            <li><a asp-controller="ThreeSession" asp-action="Index"><i class="fa fa-spinner"></i>三会一课</a></li>
+                        </ul>
+                    </li>
+                    <li class="treeview">
+                        <a href="#">
+                            <i class="fa fa-folder"></i>
+                            <span>资料管理</span>
+                            <span class="pull-right-container">
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </span>
+                        </a>
+                        <ul class="treeview-menu">
+                            <li><a asp-controller="File" asp-action="UpLoad"><i class="fa fa-folder-open"></i>上传文件</a></li>
+                            <li><a asp-controller="File" asp-action="Index"><i class="fa fa-folder-open-o"></i>文件记录</a></li>
+                        </ul>
+                    </li>
 
-                        <li><a href="https://adminlte.io/docs"><i class="fa fa-commenting"></i> <span>意见反馈</span></a></li>
-                        <li class="header">其他导航</li>
-                        <li><a href="#"><i class="fa fa-sort-numeric-desc"></i> <span>更新记录</span></a></li>
-                    </ul>
+                    <li><a href="#"><i class="fa fa-commenting"></i> <span>意见反馈</span></a></li>
+                    <li class="header">其他导航</li>
+                    <li><a asp-controller="SystemUpdate" asp-action="Index"><i class="fa fa-sort-numeric-desc"></i>更新记录</a></li>
+                </ul>
                 }
                 else
                 {
@@ -218,7 +217,7 @@
 
                         <li><a href="https://adminlte.io/docs"><i class="fa fa-commenting"></i> <span>意见反馈</span></a></li>
                         <li class="header">其他导航</li>
-                        <li><a href="#"><i class="fa fa-sort-numeric-desc"></i> <span>更新记录</span></a></li>
+                        <li><a asp-controller="SystemUpdate" asp-action="Index"><i class="fa fa-sort-numeric-desc"></i>更新记录</a></li>
                     </ul>
                 }
 

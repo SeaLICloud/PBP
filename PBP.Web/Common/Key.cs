@@ -52,5 +52,7 @@
             "Name,Description,Address,Person,Time,State,FoundPerson,FoundTime,FoundAddress,Guid,CreateTime,UpdateTime";
         public const string TSPram =
             "Type,Theme,PrimaryCoverage,ShouldArrive,TrueTo,Time,Address,Person,Guid,CreateTime,UpdateTime";
+        public const string SUPram = 
+            "Version,Title,Content,Time,Guid,CreateTime,UpdateTime";
     }
 }

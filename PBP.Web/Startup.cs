@@ -1,15 +1,12 @@
-﻿using System;
-using Microsoft.AspNetCore.Authentication.Cookies;
+﻿using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using PBP.Web.Models.Context;
-using PBP.Web.Models.Domain;
 
 namespace PBP.Web
 {
@@ -42,6 +39,7 @@ namespace PBP.Web
             services.AddDbContext<FileContext>(options => options.UseSqlServer(connection));
             services.AddDbContext<LostFoundContext>(options => options.UseSqlServer(connection));
             services.AddDbContext<ThreeSessionContext>(options => options.UseSqlServer(connection));
+            services.AddDbContext<SystemUpdateContext>(options => options.UseSqlServer(connection));
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
