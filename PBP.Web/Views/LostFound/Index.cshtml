@@ -1,0 +1,210 @@
+﻿@using PBP.Web.Models.Domain
+@model PBP.Web.Common.PaginatedList<PBP.Web.Models.Domain.LostFound>
+
+@{
+    ViewData["Title"] = "Index";
+    var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
+    var nextDisabled = !Model.HasNextPage ? "disabled" : "";
+    var currentPage = ViewData["CurrentPage"] == null ? "1" : ViewData["CurrentPage"].ToString();
+}
+
+<section class="content-header">
+    <div style="font-size: 20px">失物列表</div>
+    <ol class="breadcrumb">
+        <li>
+            <a href="#"><i class="fa fa-th-large"></i>系统主页</a>
+        </li>
+        <li>
+            <a href="#">活动管理</a>
+        </li>
+        <li class="active">失物信息</li>
+    </ol>
+</section>
+
+<section class="content">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="box">
+
+                <div class="box-header">
+                    <div class="row">
+                        <div class="col-xs-9">
+                            <a asp-action="Create" class="btn btn-default btn-sm glyphicon glyphicon-plus">添加</a>
+                        </div>
+                        <div class="col-xs-3">
+                            <form asp-action="Index" method="get">
+                                <div class="input-group input-group-sm right">
+                                    <input type="text" name="SearchString" class="form-control" value="@ViewData["currentFilter"]" placeholder="请输入物品名...">
+                                    <span class="input-group-btn">
+                                        <button type="submit" value="Search" class="btn btn-info btn-flat fa fa-search">查询</button>
+                                    </span>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="box-body">
+                    <div id="example2_wrapper" class="dataTables_wrapper form-inline">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <table id="example2" class="table table-bordered table-hover dataTable" role="grid" aria-describedby="example2_info">
+                                    <thead>
+                                        <tr role="row">
+                                            <th tabindex="0" aria-controls="example2" rowspan="1" colspan="1">物品名称</th>
+                                            <th tabindex="0" aria-controls="example2" rowspan="1" colspan="1">物品描述</th>
+
+                                            <th tabindex="0" aria-controls="example2" rowspan="1" colspan="1">拾取处</th>
+                                            <th tabindex="0" aria-controls="example2" rowspan="1" colspan="1">拾取人</th>
+                                            <th tabindex="0" aria-controls="example2" rowspan="1" colspan="1">拾取时间</th>
+
+                                            <th tabindex="0" aria-controls="example2" rowspan="1" colspan="1">招领处</th>
+                                            <th tabindex="0" aria-controls="example2" rowspan="1" colspan="1">领取人</th>
+                                            <th tabindex="0" aria-controls="example2" rowspan="1" colspan="1">领取时间</th>
+                                            <th tabindex="0" aria-controls="example2" rowspan="1" colspan="1">状态</th>
+                                            <th tabindex="0" aria-controls="example2" rowspan="1" colspan="1">操作</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var item in Model)
+                                        {
+                                            var id = "'" + item.Guid + "'";
+                                            <tr>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.Name)
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.Description)
+                                                </td>
+
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.Address)
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.Person)
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.Time)
+                                                </td>
+                                                @if (item.State == LostFound.Lost.OreadyFound)
+                                                {
+                                                    <td>
+                                                        @Html.DisplayFor(modelItem => item.FoundAddress)
+                                                    </td>
+                                                    <td>
+                                                        @Html.DisplayFor(modelItem => item.FoundPerson)
+                                                    </td>
+                                                    <td>
+                                                        @Html.DisplayFor(modelItem => item.FoundTime)
+                                                    </td>
+                                                }
+                                                else
+                                                {
+                                                    <td>
+                                                        
+                                                    </td>
+                                                    <td>
+                                                       
+                                                    </td>
+                                                    <td>
+                                                  
+                                                    </td>
+                                                }
+                                                <td>
+                                                    @if (item.State == LostFound.Lost.OreadyLost)
+                                                    {
+                                                        <span class="label label-default">
+                                                            @Html.DisplayFor(modelItem => item.State)
+                                                        </span>
+                                                    }
+                                                    else
+                                                    {
+                                                        <span class="label label-success">
+                                                            @Html.DisplayFor(modelItem => item.State)
+                                                        </span>
+                                                    }
+
+                                                </td>
+                                                <td>
+                                                @if (item.State == LostFound.Lost.OreadyLost)
+                                                {
+                                                    <a asp-action="Edit" asp-route-id="@item.Guid" class="btn btn-github btn-xs">招领</a>
+                                                }
+                                                    <button id="deleteEntity" type="button"
+                                                            class="btn btn-danger btn-xs" data-toggle="modal"
+                                                            data-target="#modal-default-delete"
+                                                            onclick="getdeleteId(@id)">
+                                                        删除
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+
+                            </div>
+                        </div>
+
+
+                        <div class="row">
+
+                            <div class="col-sm-5">
+                                <div class="dataTables_info" id="example2_info" role="status" aria-live="polite">共 @ViewData["Total"] 条 &nbsp; 第 @currentPage 页</div>
+                            </div>
+                            <div class="col-sm-7">
+                                <div class="dataTables_paginate" id="example2_paginate">
+                                    <ul class="pagination">
+                                        <li class="previous" id="example2_previous">
+                                            <a asp-action="Index"
+                                               asp-route-sortOrder="@ViewData["CurrentSort"]"
+                                               asp-route-pageNumber="@(Model.PageIndex - 1)"
+                                               asp-route-currentFilter="@ViewData["CurrentFilter"]"
+                                               class="btn btn-default btn-sm right @prevDisabled">
+                                                上一页
+                                            </a>
+                                        </li>
+                                        <li class="next" id="example2_next">
+                                            <a asp-action="Index"
+                                               asp-route-sortOrder="@ViewData["CurrentSort"]"
+                                               asp-route-pageNumber="@(Model.PageIndex + 1)"
+                                               asp-route-currentFilter="@ViewData["CurrentFilter"]"
+                                               class="btn btn-default btn-sm right @nextDisabled">
+                                                下一页
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="modal fade" id="modal-default-delete" style="display: none;">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+                <h4 class="modal-title">删除提示</h4>
+            </div>
+            <div class="modal-body">
+                <p>您确定要将该党员党费信息审核通过,通过后将不能反审核?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default pull-left btn-sm" data-dismiss="modal">关闭</button>
+                <a id="confirmdelete" class="btn btn-danger btn-sm" href="">确认</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function getdeleteId(id) {
+        $("#confirmdelete").attr("href", "/LostFound/Delete/" + id);
+    }
+</script>

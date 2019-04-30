@@ -48,5 +48,7 @@
             "PartyCostID,PartyMemberID,PostWage,SalaryRankWage,Allowance,PerformanceWage,UnionCost,MedicalInsurance,UnemploymentInsurance,OldAgeInsurance,JobAnnuity,IndividualIncomeTax,State,CostBase,Payable,Guid,CreateTime,UpdateTime,";
         public const string PCRPram =
             "PartyMemberID,PartyMemberName,PartyCostID,PayTime,PayFunc,PayAmount,BeginTime,EndTime,State,Guid,CreateTime,UpdateTime";
+        public const string LFPram =
+            "Name,Description,Address,Person,Time,State,FoundPerson,FoundTime,FoundAddress,Guid,CreateTime,UpdateTime";
     }
 }
