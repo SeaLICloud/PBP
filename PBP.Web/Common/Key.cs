@@ -50,5 +50,7 @@
             "PartyMemberID,PartyMemberName,PartyCostID,PayTime,PayFunc,PayAmount,BeginTime,EndTime,State,Guid,CreateTime,UpdateTime";
         public const string LFPram =
             "Name,Description,Address,Person,Time,State,FoundPerson,FoundTime,FoundAddress,Guid,CreateTime,UpdateTime";
+        public const string TSPram =
+            "Type,Theme,PrimaryCoverage,ShouldArrive,TrueTo,Time,Address,Person,Guid,CreateTime,UpdateTime";
     }
 }

@@ -1,0 +1,98 @@
+﻿@using PBP.Web.Common
+@using PBP.Web.Models.Domain
+@model PBP.Web.Models.Domain.ThreeSession
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<section class="content">
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="nav-tabs-custom">
+                <ul class="nav nav-tabs">
+                    <li class="active"><a href="#settings" data-toggle="tab" aria-expanded="true">添加记录</a></li>
+                </ul>
+
+                <div class="tab-content">
+                    <div class="tab-pane active" id="settings">
+                        <form asp-action="Create" class="form-horizontal">
+
+                            <div class="form-group">
+                                <label asp-for="Type" style="font-size:13px" class="col-sm-2 control-label">类型</label>
+                                <div class="col-sm-8">
+                                    <select asp-for="Type" asp-items="@Html.GetEnumSelectList(typeof(ThreeSession.Session))" class="form-control input-sm">
+                                        <option>---请选择---</option>
+                                    </select>
+                                </div>
+                                <span asp-validation-for="Type" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="Theme" style="font-size:13px" class="col-sm-2 control-label">主题</label>
+                                <div class="col-sm-8">
+                                    <input asp-for="Theme" class="form-control input-sm" placeholder="请输入主题" />
+                                </div>
+                                <span asp-validation-for="Theme" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="PrimaryCoverage" style="font-size:13px" class="col-sm-2 control-label">主要内容</label>
+                                <div class="col-sm-8">
+                                    <textarea asp-for="PrimaryCoverage" class="form-control input-sm" rows="3" placeholder="请输入主要内容 ..."></textarea>
+                                </div>
+                                <span asp-validation-for="PrimaryCoverage" class="text-danger"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label asp-for="ShouldArrive" style="font-size:13px" class="col-sm-2 control-label">应到人数</label>
+                                <div class="col-sm-8">
+                                    <input asp-for="ShouldArrive" class="form-control input-sm" placeholder="请输入应到人数" />
+                                </div>
+                                <span asp-validation-for="ShouldArrive" class="text-danger"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label asp-for="TrueTo" style="font-size:13px" class="col-sm-2 control-label">实到人数</label>
+                                <div class="col-sm-8">
+                                    <input asp-for="TrueTo" class="form-control input-sm" placeholder="请输入实到人数" />
+                                </div>
+                                <span asp-validation-for="TrueTo" class="text-danger"></span>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label asp-for="Time" style="font-size:13px" class="col-sm-2 control-label">时间</label>
+                                <div class="col-sm-8">
+                                    <input asp-for="Time" class="form-control input-sm" placeholder="请输入时间" />
+                                </div>
+                                <span asp-validation-for="Time" class="text-danger"></span>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label asp-for="Address" style="font-size:13px" class="col-sm-2 control-label">地点</label>
+                                <div class="col-sm-8">
+                                    <input asp-for="Address" class="form-control input-sm" placeholder="请输入地点" />
+                                </div>
+                                <span asp-validation-for="Address" class="text-danger"></span>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label asp-for="Person" style="font-size:13px" class="col-sm-2 control-label">记录人</label>
+                                <div class="col-sm-8">
+                                    <input asp-for="Person" class="form-control input-sm" placeholder="请输入记录人" />
+                                </div>
+                                <span asp-validation-for="Person" class="text-danger"></span>
+                            </div>
+                            <a asp-action="Index" class="btn btn-default btn-sm">返回</a>
+                            <input type="submit" value="确认" class="btn btn-danger pull-right btn-sm" />
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
