@@ -1,8 +1,10 @@
-﻿@using PBP.Web.Common
+﻿@using System.Security.Claims
+@using PBP.Web.Common
 @using PBP.Web.Models.Domain
 @model PBP.Web.Models.Domain.PartyMember
 
 @{
+    var currentRole = Context.User.Claims.First(x => x.Type == ClaimTypes.Role).Value;
     ViewData["Title"] = "Edit";
 }
 
@@ -81,9 +83,15 @@
                                 </div>
                                 <span asp-validation-for="OrgID" class="text-danger"></span>
                             </div>
-
-                            <a asp-action="Index" class="btn btn-default btn-sm">返回</a>
-                            <input type="submit" value="确认" class="btn btn-danger pull-right btn-sm" />
+                            @if (string.Equals(currentRole, UserRole.Admin.ToString(), StringComparison.CurrentCultureIgnoreCase))
+                            {
+                                <a asp-action="Index" class="btn btn-default btn-sm">返回</a>
+                                <input type="submit" value="确认" class="btn btn-danger pull-right btn-sm" />
+                            }
+                            else
+                            {
+                                <input type="submit" value="确认" class="btn btn-danger btn-sm" />
+                            }
 
                         </form>
                     </div>

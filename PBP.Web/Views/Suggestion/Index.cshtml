@@ -1,0 +1,156 @@
+﻿@model PBP.Web.Common.PaginatedList<PBP.Web.Models.Domain.Suggestion>
+
+@{
+    ViewData["Title"] = "Index";
+    var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
+    var nextDisabled = !Model.HasNextPage ? "disabled" : "";
+    var currentPage = ViewData["CurrentPage"] == null ? "1" : ViewData["CurrentPage"].ToString();
+}
+
+<section class="content-header">
+    <div style="font-size: 20px">邮件记录</div>
+    <ol class="breadcrumb">
+        <li>
+            <a href="#"><i class="fa fa-th-large"></i>系统主页</a>
+        </li>
+        <li>
+            <a href="#">意见反馈</a>
+        </li>
+        <li class="active">意见记录</li>
+    </ol>
+</section>
+
+<section class="content">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="box">
+
+                <div class="box-header">
+                    <div class="row">
+                        <div class="col-xs-3">
+                            <form asp-action="Index" method="get">
+                                <div class="input-group input-group-sm right">
+                                    <input type="text" name="SearchString" class="form-control" value="@ViewData["currentFilter"]" placeholder="请输入党员代码...">
+                                    <span class="input-group-btn">
+                                        <button type="submit" value="Search" class="btn btn-info btn-flat fa fa-search">查询</button>
+                                    </span>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="box-body">
+                    <div id="example2_wrapper" class="dataTables_wrapper form-inline">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <table id="example2" class="table table-bordered table-hover dataTable" role="grid" aria-describedby="example2_info">
+                                    <thead>
+                                        <tr role="row">
+                                            <th tabindex="0" aria-controls="example2" rowspan="1" colspan="1">发送人邮箱</th>
+                                            <th tabindex="0" aria-controls="example2" rowspan="1" colspan="1">接收人邮箱</th>
+                                            <th tabindex="0" aria-controls="example2" rowspan="1" colspan="1">标题</th>
+                                            <th tabindex="0" aria-controls="example2" rowspan="1" colspan="1">内容</th>
+                                            <th tabindex="0" aria-controls="example2" rowspan="1" colspan="1">发送时间</th>
+                                            <th tabindex="0" aria-controls="example2" rowspan="1" colspan="1">操作</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var item in Model)
+                                        {
+                                            var id = "'" + item.Guid + "'";
+                                            <tr>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.SendEmail)
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.AcceptEmail)
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.Title)
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.Content)
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.SendTime)
+                                                </td>
+                                                <td>
+                                                    <button id="deleteEntity" type="button"
+                                                            class="btn btn-danger btn-xs" data-toggle="modal"
+                                                            data-target="#modal-default-delete"
+                                                            onclick="getdeleteId(@id)">
+                                                        删除
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+
+                            </div>
+                        </div>
+
+
+                        <div class="row">
+
+                            <div class="col-sm-5">
+                                <div class="dataTables_info" id="example2_info" role="status" aria-live="polite">共 @ViewData["Total"] 条 &nbsp; 第 @currentPage 页</div>
+                            </div>
+                            <div class="col-sm-7">
+                                <div class="dataTables_paginate" id="example2_paginate">
+                                    <ul class="pagination">
+                                        <li class="previous" id="example2_previous">
+                                            <a asp-action="Index"
+                                               asp-route-sortOrder="@ViewData["CurrentSort"]"
+                                               asp-route-pageNumber="@(Model.PageIndex - 1)"
+                                               asp-route-currentFilter="@ViewData["CurrentFilter"]"
+                                               class="btn btn-default btn-sm right @prevDisabled">
+                                                上一页
+                                            </a>
+                                        </li>
+                                        <li class="next" id="example2_next">
+                                            <a asp-action="Index"
+                                               asp-route-sortOrder="@ViewData["CurrentSort"]"
+                                               asp-route-pageNumber="@(Model.PageIndex + 1)"
+                                               asp-route-currentFilter="@ViewData["CurrentFilter"]"
+                                               class="btn btn-default btn-sm right @nextDisabled">
+                                                下一页
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="modal fade" id="modal-default-delete" style="display: none;">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+                <h4 class="modal-title">删除提示</h4>
+            </div>
+            <div class="modal-body">
+                <p>您确定要将邮件记录删除?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default pull-left btn-sm" data-dismiss="modal">关闭</button>
+                <a id="confirmdelete" class="btn btn-danger btn-sm" href="">确认</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function getdeleteId(id) {
+        $("#confirmdelete").attr("href", "/Suggestion/Delete/" + id);
+    }
+</script>

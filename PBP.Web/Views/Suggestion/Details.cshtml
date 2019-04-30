@@ -1,0 +1,60 @@
+﻿@model PBP.Web.Models.Domain.Suggestion
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Suggestion</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.SendEmail)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.SendEmail)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.AcceptEmail)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.AcceptEmail)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Title)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Title)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Content)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Content)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.SendTime)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.SendTime)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.CreateTime)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.CreateTime)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.UpdateTime)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.UpdateTime)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.Guid">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

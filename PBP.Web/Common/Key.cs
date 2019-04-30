@@ -54,5 +54,7 @@
             "Type,Theme,PrimaryCoverage,ShouldArrive,TrueTo,Time,Address,Person,Guid,CreateTime,UpdateTime";
         public const string SUPram = 
             "Version,Title,Content,Time,Guid,CreateTime,UpdateTime";
+        public const string SPram = 
+            "SendEmail,AcceptEmail,Title,Content,SendTime,Guid,CreateTime,UpdateTime";
     }
 }

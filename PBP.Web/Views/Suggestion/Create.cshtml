@@ -1,0 +1,51 @@
+﻿@model PBP.Web.Models.Domain.Suggestion
+
+@{
+    ViewData["Title"] = "Create";
+}
+<section class="content">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="nav-tabs-custom">
+                <ul class="nav nav-tabs">
+                    <li class="active"><a href="#settings" data-toggle="tab" aria-expanded="true">发送邮件</a></li>
+                </ul>
+                <div class="tab-content">
+                    <div class="tab-pane active" id="settings">
+                        <form asp-action="Create" class="form-horizontal">
+                            
+                            <div class="form-group">
+                                <label asp-for="AcceptEmail" style="font-size:13px" class="col-sm-2 control-label">接收人邮件</label>
+                                <div class="col-sm-8">
+                                    <input asp-for="AcceptEmail" class="form-control input-sm" placeholder="输入地址 ..." />
+                                </div>
+                                <span asp-validation-for="AcceptEmail" class="text-danger"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label asp-for="Title" style="font-size:13px" class="col-sm-2 control-label">邮件标题</label>
+                                <div class="col-sm-8">
+                                    <input asp-for="Title" class="form-control input-sm" placeholder="输入标题 ..." />
+                                </div>
+                                <span asp-validation-for="Title" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="Title" style="font-size:13px" class="col-sm-2 control-label">邮件内容</label>
+                                <div class="col-sm-8">
+                                    <textarea asp-for="Content" class="form-control input-sm" rows="10" placeholder="输入内容 ..."></textarea>
+                                </div>
+                                <span asp-validation-for="Title" class="text-danger"></span>
+                            </div>
+
+                            <input type="submit" value="Send" class="btn btn-github btn-sm" />
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

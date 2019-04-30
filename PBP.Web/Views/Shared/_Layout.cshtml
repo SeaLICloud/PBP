@@ -36,7 +36,7 @@
             <!-- Logo -->
             <a href="#" class="logo">
                 <!-- mini logo for sidebar mini 50x50 pixels -->
-                <span class="logo-mini">csm</span>
+                @* <span class="logo-mini">csm</span> *@
                 <!-- logo for regular state and mobile devices -->
                 <span style="font-size:14px" class="logo-lg small">湖南文理计电学院党建信息平台</span>
             </a>
@@ -69,7 +69,7 @@
                                 <!-- Menu Footer-->
                                 <li class="user-footer ">
                                     <div class="pull-left">
-                                        <a href="#" class="btn btn-default btn-flat">党员信息</a>
+                                        <a asp-controller="PartyMember" asp-action="Edit" class="btn btn-default btn-flat">党员信息</a>
                                     </div>
                                     <div class="pull-right">
                                         <a asp-controller="Account" asp-action="LogOut" class="btn btn-default btn-flat">退出登录</a>
@@ -177,7 +177,7 @@
                         </ul>
                     </li>
 
-                    <li><a href="#"><i class="fa fa-commenting"></i> <span>意见反馈</span></a></li>
+                    <li><a asp-controller="Suggestion" asp-action="Index"><i class="fa fa-commenting"></i> <span>反馈记录</span></a></li>
                     <li class="header">其他导航</li>
                     <li><a asp-controller="SystemUpdate" asp-action="Index"><i class="fa fa-book"></i> <span>更新记录</span></a></li>
                 </ul>
@@ -215,7 +215,7 @@
                         </ul>
                     </li>
 
-                    <li><a href="https://adminlte.io/docs"><i class="fa fa-commenting"></i> <span>意见反馈</span></a></li>
+                    <li><a asp-controller="Suggestion" asp-action="Create"><i class="fa fa-commenting"></i> <span>意见反馈</span></a></li>
                     <li class="header">其他导航</li>
 
                     <li><a asp-controller="SystemUpdate" asp-action="Index"><i class="fa fa-book"></i> <span>更新记录</span></a></li>

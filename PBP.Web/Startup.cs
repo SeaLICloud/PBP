@@ -40,6 +40,7 @@ namespace PBP.Web
             services.AddDbContext<LostFoundContext>(options => options.UseSqlServer(connection));
             services.AddDbContext<ThreeSessionContext>(options => options.UseSqlServer(connection));
             services.AddDbContext<SystemUpdateContext>(options => options.UseSqlServer(connection));
+            services.AddDbContext<SuggestionContext>(options => options.UseSqlServer(connection));
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)

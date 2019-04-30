@@ -121,20 +121,5 @@ namespace PBP.Web.Controllers
             await context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
-
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(Guid id)
-        {
-            var partyCostRecord = await context.PartyCostRecords.FindAsync(id);
-            context.PartyCostRecords.Remove(partyCostRecord);
-            await context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
-        }
-
-        private bool PartyCostRecordExists(Guid id)
-        {
-            return context.PartyCostRecords.Any(e => e.Guid == id);
-        }
     }
 }
