@@ -271,7 +271,7 @@ namespace PBP.Web.Controllers
                         new ClaimsPrincipal(claimsIdentity));
                 }).Wait();
 
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(Index),"Home");
             }
 
             ViewData[VKey.LOGINFAILED] = CKey.UDNOTNULL;
