@@ -160,7 +160,6 @@
                                 </span>
                             </a>
                             <ul class="treeview-menu">
-                                <li><a href="#"><i class="fa fa-user-plus"></i>义工值班</a></li>
                                 <li><a href="#"><i class="fa fa-location-arrow"></i>失物招领</a></li>
                                 <li><a href="#"><i class="fa fa-spinner"></i>三会一课</a></li>
                             </ul>
@@ -175,7 +174,8 @@
                                 </span>
                             </a>
                             <ul class="treeview-menu">
-                                <li><a href="#"><i class="fa fa-folder-open"></i>文件记录</a></li>
+                                <li><a asp-controller="File" asp-action="UpLoad"><i class="fa fa-folder-open"></i>上传文件</a></li>
+                                <li><a asp-controller="File" asp-action="Index"><i class="fa fa-folder-open"></i>文件记录</a></li>
                             </ul>
                         </li>
 
